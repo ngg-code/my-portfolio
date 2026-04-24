@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on My Portfolio</title>
+    <link>http://localhost:1313/my-portfolio/posts/</link>
+    <description>Recent content in Posts on My Portfolio</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Apr 2026 09:25:37 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/my-portfolio/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collaboration</title>
+      <link>http://localhost:1313/my-portfolio/posts/collaboration/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/collaboration/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Evaluation</title>
+      <link>http://localhost:1313/my-portfolio/posts/evaluation/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/evaluation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Infrastructure</title>
+      <link>http://localhost:1313/my-portfolio/posts/infrastructure/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/infrastructure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Process</title>
+      <link>http://localhost:1313/my-portfolio/posts/process/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/process/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Prototyping</title>
+      <link>http://localhost:1313/my-portfolio/posts/prototyping/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/prototyping/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Self Learning</title>
+      <link>http://localhost:1313/my-portfolio/posts/self-learning/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/self-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Abstraction</title>
+      <link>http://localhost:1313/my-portfolio/posts/abstraction/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/abstraction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Architecture</title>
+      <link>http://localhost:1313/my-portfolio/posts/architecture/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/architecture/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Needfinding</title>
+      <link>http://localhost:1313/my-portfolio/posts/needfinding/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/needfinding/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing Infrastructure</title>
+      <link>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing Strategies</title>
+      <link>http://localhost:1313/my-portfolio/posts/testing-strategies/</link>
+      <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
+      <guid>http://localhost:1313/my-portfolio/posts/testing-strategies/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

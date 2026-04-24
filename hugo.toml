@@ -1,0 +1,16 @@
+baseURL = "https://ngg-code.github.io/my-portfolio/"
+languageCode = "en-us"
+title = "My Portfolio"
+theme = "PaperMod"
+
+[params]
+  description = "CS Portfolio"
+  ShowReadingTime = false
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+
+[menu]
+  [[menu.main]]
+    name = "Competencies"
+    url = "/posts/"
+    weight = 1

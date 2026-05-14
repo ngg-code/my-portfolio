@@ -7,7 +7,8 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Infrastructure | My Portfolio</title>
 <meta name="keywords" content="">
-<meta name="description" content="Infrastructure - My Portfolio">
+<meta name="description" content="What development tools did you use through the process to help write code and automate the build/deployment process?
+The primary development tools were: Vite as the build tool and dev server (with hot module replacement making UI changes instantly visible without a full reload). Node.js &#43; Express for the local API server, PostgreSQL for the database with SQL seed scripts loaded via psql, and Git &#43; GitHub for version control and PR-based code review. npm run server and npm run dev are the two commands that together bring the full stack up locally.">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/my-portfolio/posts/infrastructure/">
 <link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
@@ -121,6 +122,13 @@
 
 </div>
   </header> 
+  <div class="post-content md-content"><p>What development tools did you use through the process to help write code and automate the build/deployment process?</p>
+<p>The primary development tools were: Vite as the build tool and dev server (with hot module replacement making UI changes instantly visible without a full reload). Node.js + Express for the local API server, PostgreSQL for the database with SQL seed scripts loaded via psql, and Git + GitHub for version control and PR-based code review. npm run server and npm run dev are the two commands that together bring the full stack up locally.</p>
+<p>What is one specific problem you encountered while writing code and how did your tools help or hinder your ability to address that problem?</p>
+<p>When implementing the major-switch feature (swapping from CSC to Anthropology requirements), the requirements panel was rendering stale data — the old major&rsquo;s blocks appeared briefly after the dropdown changed. Vite&rsquo;s hot reload let us iterate on the fix quickly, but the root cause was an ESLint react-hooks/exhaustive-deps warning we had initially suppressed. Once we paid attention to it and added selectedMajorCode to the useEffect dependency array in src/App.jsx (line 61), the stale render disappeared. ESLint&rsquo;s warning was the diagnostic that pointed directly at the bug.</p>
+
+
+  </div>
 
   <footer class="post-footer">
     <ul class="post-tags">

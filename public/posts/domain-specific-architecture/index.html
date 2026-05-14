@@ -5,12 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Evaluation | My Portfolio</title>
+<title>Domain Specific Architecture | My Portfolio</title>
 <meta name="keywords" content="">
-<meta name="description" content="What was the design of your user study to evaluate your artifact?
-After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: &ldquo;Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.&rdquo; Afterward we asked a short questions about what was confusing and what they would change.">
+<meta name="description" content="src/App.jsx lines 160–308 (getPreferredSemesterIndex, getSequenceScore, canPlaceCourse)
+What aspects of your software architecture arise because of the domain?
+The entire course placement layer exists solely because of the domain: academic scheduling has prerequisites (a directed dependency graph), term offerings (courses only exist in Fall or Spring), department enrollment caps (no more than 2 CSC courses/semester in years 1–2), and standing requirements. None of these constraints map onto generic CRUD patterns. The architecture adds a dedicated constraint validation layer (canPlaceCourse, lines 233–308) that sits between any user or algorithm action and the state mutation. Every course placement — manual or automated — passes through this layer before anything changes.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/my-portfolio/posts/evaluation/">
+<link rel="canonical" href="http://localhost:1313/my-portfolio/posts/domain-specific-architecture/">
 <link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/my-portfolio/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/my-portfolio/favicon-16x16.png">
@@ -19,7 +20,7 @@ After building the working application, we ran a structured usability test with 
 <link rel="mask-icon" href="http://localhost:1313/my-portfolio/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/my-portfolio/posts/evaluation/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/my-portfolio/posts/domain-specific-architecture/">
 <noscript>
     <style>
         #theme-toggle,
@@ -110,24 +111,19 @@ After building the working application, we ran a structured usability test with 
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      Evaluation
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
+      Domain Specific Architecture
     </h1>
-    <div class="post-meta"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span>
+    <div class="post-meta"><span title='2026-05-11 14:52:52 -0500 CDT'>May 11, 2026</span>
 
 </div>
   </header> 
-  <div class="post-content md-content"><p>What was the design of your user study to evaluate your artifact?</p>
-<p>After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: &ldquo;Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.&rdquo; Afterward we asked a short questions about what was confusing and what they would change.</p>
-<p>What were the results of this user study?</p>
-<p>All three users successfully completed a plan and reached the requirements check. The main friction points were: (1) users initially did not notice the &ldquo;Auto-Fill Remaining Plan&rdquo; button because it was visually similar to the other control buttons; (2) the error message when placing a course that failed a prerequisite check was visible but users sometimes dismissed it quickly and lost track of why a slot remained empty. One user suggested color-coding the semester cards differently for years to aid orientation.</p>
-<p>What were the main points of future development that you took away from this activity?</p>
-<p>The primary future work items were: (1) visually distinguish the Auto-Fill button to make it more discoverable; (2) show inline slot-level error indicators rather than relying on a dismissable banner message for prerequisite violations; (3) optionally color-code or group semester cards by year. A longer-term suggestion was to allow students to save and share their plans.</p>
+  <div class="post-content md-content"><p>src/App.jsx lines 160–308 (getPreferredSemesterIndex, getSequenceScore, canPlaceCourse)</p>
+<p>What aspects of your software architecture arise because of the domain?</p>
+<p>The entire course placement layer exists solely because of the domain: academic scheduling has prerequisites (a directed dependency graph), term offerings (courses only exist in Fall or Spring), department enrollment caps (no more than 2 CSC courses/semester in years 1–2), and standing requirements. None of these constraints map onto generic CRUD patterns. The architecture adds a dedicated constraint validation layer (canPlaceCourse, lines 233–308) that sits between any user or algorithm action and the state mutation. Every course placement — manual or automated — passes through this layer before anything changes.</p>
+<p>What domain-specific problem does your architectural choice solve?</p>
+<p>The central domain problem is that academic prerequisites form a directed acyclic graph (DAG): a course can only be placed if all its predecessors appear in earlier semesters. This is fundamentally different from a standard form-input problem. Placing CSC-301 requires that CSC-207 and CSC-208 are both already in earlier slots, and those courses themselves have their own predecessors. Without an explicit validation layer, the auto-fill algorithm and the manual selection path would each need to duplicate prerequisite-checking logic, and omitting it would silently produce illegal plans.</p>
+<p>How does your solution solve these issues?</p>
+<p>canPlaceCourse encodes all domain constraints in one place and returns a boolean. The autoFillPlan algorithm (lines 513–633) iterates slots in chronological order and calls canPlaceCourse for each candidate — the temporal iteration implicitly enforces topological ordering because a course can only be placed once its prerequisites have already been placed in earlier (already-processed) slots. The getSequenceScore function (lines 181–189) then adds a scoring layer that approximates the preferred depth in the DAG using course level numbers (100s → early, 400s → late), producing plans that feel natural without explicitly walking the graph.</p>
 
 
   </div>
@@ -136,13 +132,13 @@ After building the working application, we ran a structured usability test with 
     <ul class="post-tags">
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/my-portfolio/posts/collaboration/">
+  <a class="prev" href="http://localhost:1313/my-portfolio/posts/testing-technologies/">
     <span class="title">« Prev</span>
-    <span>Collaboration</span>
+    <span>Testing Technologies</span>
   </a>
-  <a class="next" href="http://localhost:1313/my-portfolio/posts/infrastructure/">
+  <a class="next" href="http://localhost:1313/my-portfolio/posts/security/">
     <span class="title">Next »</span>
-    <span>Infrastructure</span>
+    <span>Security</span>
   </a>
 </nav>
 

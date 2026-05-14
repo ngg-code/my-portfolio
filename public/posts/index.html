@@ -113,7 +113,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Collaboration
+    <h2 class="entry-hint-parent">Quality
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Where the codebase exemplifies engineering excellence:
+Single source of truth for course validation.
+canPlaceCourse (src/App.jsx:233–308) is called by both the manual selection path and the auto-fill algorithm. There is no duplicate prerequisite-checking code anywhere. Normalized data access. normalizeCourse is defined once and used consistently everywhere course codes are compared — it handles the CSC-151 vs CSC151 vs csc 151 variations that arise from different data sources. Without it, course lookups would silently fail on format mismatches. Parameterized SQL throughout. Every query in server/index.js uses $1/$2 placeholders, eliminating SQL injection as a vulnerability class. Component boundaries are clean. SemestersTable and MajorRequirements are fully controlled components: they own no authoritative state, accept data via props, and communicate upward through callbacks. This makes their behavior completely predictable from the outside. The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–189) solves the topological ordering problem with a simple function rather than a full graph traversal — adequate for the domain size and much easier to reason about.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-11 14:59:15 -0500 CDT'>May 11, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Quality" href="http://localhost:1313/my-portfolio/posts/quality/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Accessible Design
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
           <path
@@ -124,6 +139,82 @@
   </header>
   <div class="entry-content">
     <p></p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-11 14:55:27 -0500 CDT'>May 11, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Accessible Design" href="http://localhost:1313/my-portfolio/posts/accessible-design/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">UI Design
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
+Visibility of system status :
+Status dots change from gray → green/red only after “Check Requirements” is clicked, giving explicit feedback about what the system knows vs. what it hasn’t evaluated. The progress bar shows the correct percentage (line 191: transition: “width 0.4s ease”), showing that a state change just occurred.
+Direct manipulation:
+Clicking a semester slot transforms it in-place into a dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-11 14:54:22 -0500 CDT'>May 11, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to UI Design" href="http://localhost:1313/my-portfolio/posts/ui-design/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Testing Technologies
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-11 14:53:54 -0500 CDT'>May 11, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Testing Technologies" href="http://localhost:1313/my-portfolio/posts/testing-technologies/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Domain Specific Architecture
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>src/App.jsx lines 160–308 (getPreferredSemesterIndex, getSequenceScore, canPlaceCourse)
+What aspects of your software architecture arise because of the domain?
+The entire course placement layer exists solely because of the domain: academic scheduling has prerequisites (a directed dependency graph), term offerings (courses only exist in Fall or Spring), department enrollment caps (no more than 2 CSC courses/semester in years 1–2), and standing requirements. None of these constraints map onto generic CRUD patterns. The architecture adds a dedicated constraint validation layer (canPlaceCourse, lines 233–308) that sits between any user or algorithm action and the state mutation. Every course placement — manual or automated — passes through this layer before anything changes.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-11 14:52:52 -0500 CDT'>May 11, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Domain Specific Architecture" href="http://localhost:1313/my-portfolio/posts/domain-specific-architecture/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Security
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p></p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-11 14:50:49 -0500 CDT'>May 11, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Security" href="http://localhost:1313/my-portfolio/posts/security/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Collaboration
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Instance 1 — Code review of a pull request
+Linda Jing opened Pull request to add the requirement logic to the SQL files and connect it to App.jsx. The review identified that the prerequisite logic needed adjustment to handle the case where a course appears in both a must_take block and an elective block — without duplication, the same course could satisfy two independent requirements simultaneously. The review comment resulted in the commit 2238a86 - revised pre req logic based on the code review where Linda updated the logic.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Collaboration" href="http://localhost:1313/my-portfolio/posts/collaboration/"></a>
@@ -141,7 +232,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>What was the design of your user study to evaluate your artifact?
+After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: “Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.” Afterward we asked a short questions about what was confusing and what they would change.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Evaluation" href="http://localhost:1313/my-portfolio/posts/evaluation/"></a>
@@ -159,7 +252,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>What development tools did you use through the process to help write code and automate the build/deployment process?
+The primary development tools were: Vite as the build tool and dev server (with hot module replacement making UI changes instantly visible without a full reload). Node.js &#43; Express for the local API server, PostgreSQL for the database with SQL seed scripts loaded via psql, and Git &#43; GitHub for version control and PR-based code review. npm run server and npm run dev are the two commands that together bring the full stack up locally.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Infrastructure" href="http://localhost:1313/my-portfolio/posts/infrastructure/"></a>
@@ -168,127 +263,15 @@
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Process
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>What software engineering practices did your group employ to manage, distribute, and execute on their work?
+The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests, and merges required a review before being merged into main. Work was distributed by component ownership — Linda Jing was primarily responsible for SQL schema, Drilon Qerimi focused on the backend, and I was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Process" href="http://localhost:1313/my-portfolio/posts/process/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Prototyping
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Prototyping" href="http://localhost:1313/my-portfolio/posts/prototyping/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Self Learning
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Self Learning" href="http://localhost:1313/my-portfolio/posts/self-learning/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Abstraction
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Abstraction" href="http://localhost:1313/my-portfolio/posts/abstraction/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Architecture
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Architecture" href="http://localhost:1313/my-portfolio/posts/architecture/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Needfinding
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Needfinding" href="http://localhost:1313/my-portfolio/posts/needfinding/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Testing Infrastructure
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Testing Infrastructure" href="http://localhost:1313/my-portfolio/posts/testing-infrastructure/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

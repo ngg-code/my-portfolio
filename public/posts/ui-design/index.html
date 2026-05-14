@@ -5,12 +5,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Evaluation | My Portfolio</title>
+<title>UI Design | My Portfolio</title>
 <meta name="keywords" content="">
-<meta name="description" content="What was the design of your user study to evaluate your artifact?
-After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: &ldquo;Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.&rdquo; Afterward we asked a short questions about what was confusing and what they would change.">
+<meta name="description" content="src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
+Visibility of system status :
+Status dots change from gray → green/red only after &ldquo;Check Requirements&rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: &ldquo;width 0.4s ease&rdquo;), showing that a state change just occurred.
+Direct manipulation:
+Clicking a semester slot transforms it in-place into a  dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/my-portfolio/posts/evaluation/">
+<link rel="canonical" href="http://localhost:1313/my-portfolio/posts/ui-design/">
 <link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/my-portfolio/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/my-portfolio/favicon-16x16.png">
@@ -19,7 +22,7 @@ After building the working application, we ran a structured usability test with 
 <link rel="mask-icon" href="http://localhost:1313/my-portfolio/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/my-portfolio/posts/evaluation/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/my-portfolio/posts/ui-design/">
 <noscript>
     <style>
         #theme-toggle,
@@ -110,24 +113,19 @@ After building the working application, we ran a structured usability test with 
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      Evaluation
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
+      UI Design
     </h1>
-    <div class="post-meta"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span>
+    <div class="post-meta"><span title='2026-05-11 14:54:22 -0500 CDT'>May 11, 2026</span>
 
 </div>
   </header> 
-  <div class="post-content md-content"><p>What was the design of your user study to evaluate your artifact?</p>
-<p>After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: &ldquo;Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.&rdquo; Afterward we asked a short questions about what was confusing and what they would change.</p>
-<p>What were the results of this user study?</p>
-<p>All three users successfully completed a plan and reached the requirements check. The main friction points were: (1) users initially did not notice the &ldquo;Auto-Fill Remaining Plan&rdquo; button because it was visually similar to the other control buttons; (2) the error message when placing a course that failed a prerequisite check was visible but users sometimes dismissed it quickly and lost track of why a slot remained empty. One user suggested color-coding the semester cards differently for years to aid orientation.</p>
-<p>What were the main points of future development that you took away from this activity?</p>
-<p>The primary future work items were: (1) visually distinguish the Auto-Fill button to make it more discoverable; (2) show inline slot-level error indicators rather than relying on a dismissable banner message for prerequisite violations; (3) optionally color-code or group semester cards by year. A longer-term suggestion was to allow students to save and share their plans.</p>
+  <div class="post-content md-content"><p>src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)</p>
+<p>Visibility of system status :</p>
+<p>Status dots change from gray → green/red only after &ldquo;Check Requirements&rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: &ldquo;width 0.4s ease&rdquo;), showing that a state change just occurred.</p>
+<p>Direct manipulation:</p>
+<p>Clicking a semester slot transforms it in-place into a <!-- raw HTML omitted --> dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.</p>
+<p>Alternative considered and why current design prevail:</p>
+<p>A flat checklist (one row per requirement, all always visible) was considered, but we didn&rsquo;t like it because it violates the minimalist design principle — a student with 18 requirement blocks visible simultaneously while also editing their plan loses focus on the planning task. The collapsible tree (line 270) allows completed blocks to be collapsed away, keeping attention on what&rsquo;s incomplete. The tree also exposes the parent-child relationship between blocks and individual courses, which a flat list cannot represent.</p>
 
 
   </div>
@@ -136,13 +134,13 @@ After building the working application, we ran a structured usability test with 
     <ul class="post-tags">
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/my-portfolio/posts/collaboration/">
+  <a class="prev" href="http://localhost:1313/my-portfolio/posts/accessible-design/">
     <span class="title">« Prev</span>
-    <span>Collaboration</span>
+    <span>Accessible Design</span>
   </a>
-  <a class="next" href="http://localhost:1313/my-portfolio/posts/infrastructure/">
+  <a class="next" href="http://localhost:1313/my-portfolio/posts/testing-technologies/">
     <span class="title">Next »</span>
-    <span>Infrastructure</span>
+    <span>Testing Technologies</span>
   </a>
 </nav>
 

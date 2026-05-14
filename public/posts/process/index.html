@@ -7,7 +7,8 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Process | My Portfolio</title>
 <meta name="keywords" content="">
-<meta name="description" content="Process - My Portfolio">
+<meta name="description" content="What software engineering practices did your group employ to manage, distribute, and execute on their work?
+The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests, and merges required a review before being merged into main. Work was distributed by component ownership — Linda Jing was primarily responsible for SQL schema, Drilon Qerimi focused on the backend, and I was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/my-portfolio/posts/process/">
 <link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
@@ -110,17 +111,20 @@
     
     <h1 class="post-title entry-hint-parent">
       Process
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
     </h1>
     <div class="post-meta"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span>
 
 </div>
   </header> 
+  <div class="post-content md-content"><p>What software engineering practices did your group employ to manage, distribute, and execute on their work?</p>
+<p>The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests, and merges required a review before being merged into main. Work was distributed by component ownership — Linda Jing was primarily responsible for SQL schema, Drilon Qerimi focused on the backend, and I was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.</p>
+<p>In your estimation, how well did your group follow through on using these processes throughout the semester?</p>
+<p>The PR-and-review process was followed for the majority of last larger integrations , which were the riskiest points where divergent codebases needed to merge. For smaller changes — particularly the UI work like commit 3dbb7d3, code was pushed directly to main without a PR. Overall, the team used the process well when the stakes were high but let it slip on later incremental work as we got close to the end of the semester.</p>
+<p>What, if anything, got in the way of integrating these processes into your workflow?</p>
+<p>The main friction was the local database setup requirement. Because the project requires a running PostgreSQL instance with the seed data loaded, we could not always review and run each other&rsquo;s code quickly. We reviewed a SQL schema change had to reload the database before they could verify the behavior in the UI, which added enough friction that some changes were merged on inspection of the SQL alone rather than after a full end-to-end test.    s</p>
+
+
+  </div>
 
   <footer class="post-footer">
     <ul class="post-tags">

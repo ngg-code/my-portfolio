@@ -1,6 +1,6 @@
 +++
 date = '2026-05-11T14:59:15-05:00'
-draft = true
+draft = false
 title = 'Quality'
 +++
 https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx

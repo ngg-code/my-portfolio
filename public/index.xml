@@ -2,221 +2,245 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>My Portfolio</title>
-    <link>http://localhost:1313/my-portfolio/</link>
+    <link>https://ngg-code.github.io/my-portfolio/</link>
     <description>Recent content on My Portfolio</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 May 2026 14:59:15 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/my-portfolio/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Quality</title>
-      <link>http://localhost:1313/my-portfolio/posts/quality/</link>
-      <pubDate>Mon, 11 May 2026 14:59:15 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/quality/</guid>
-      <description>&lt;p&gt;Where the codebase exemplifies engineering excellence:&lt;/p&gt;
-&lt;p&gt;Single source of truth for course validation.&lt;/p&gt;
-&lt;p&gt;canPlaceCourse (src/App.jsx:233–308) is called by both the manual selection path and the auto-fill algorithm. There is no duplicate prerequisite-checking code anywhere.
-Normalized data access. normalizeCourse is defined once and used consistently everywhere course codes are compared — it handles the CSC-151 vs CSC151 vs csc 151 variations that arise from different data sources. Without it, course lookups would silently fail on format mismatches.
-Parameterized SQL throughout. Every query in server/index.js uses $1/$2 placeholders, eliminating SQL injection as a vulnerability class.
-Component boundaries are clean. SemestersTable and MajorRequirements are fully controlled components: they own no authoritative state, accept data via props, and communicate upward through callbacks. This makes their behavior completely predictable from the outside.
-The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–189) solves the topological ordering problem with a simple function rather than a full graph traversal — adequate for the domain size and much easier to reason about.&lt;/p&gt;</description>
-    </item>
+    <lastBuildDate>Mon, 11 May 2026 14:55:27 -0500</lastBuildDate>
+    <atom:link href="https://ngg-code.github.io/my-portfolio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Accessible Design</title>
-      <link>http://localhost:1313/my-portfolio/posts/accessible-design/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/accessible-design/</link>
       <pubDate>Mon, 11 May 2026 14:55:27 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/accessible-design/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>UI Design</title>
-      <link>http://localhost:1313/my-portfolio/posts/ui-design/</link>
-      <pubDate>Mon, 11 May 2026 14:54:22 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/ui-design/</guid>
-      <description>&lt;p&gt;src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)&lt;/p&gt;
-&lt;p&gt;Visibility of system status :&lt;/p&gt;
-&lt;p&gt;Status dots change from gray → green/red only after &amp;ldquo;Check Requirements&amp;rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&amp;rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: &amp;ldquo;width 0.4s ease&amp;rdquo;), showing that a state change just occurred.&lt;/p&gt;
-&lt;p&gt;Direct manipulation:&lt;/p&gt;
-&lt;p&gt;Clicking a semester slot transforms it in-place into a &lt;!-- raw HTML omitted --&gt; dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Testing Technologies</title>
-      <link>http://localhost:1313/my-portfolio/posts/testing-technologies/</link>
-      <pubDate>Mon, 11 May 2026 14:53:54 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/testing-technologies/</guid>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/accessible-design/</guid>
       <description></description>
     </item>
     <item>
       <title>Domain Specific Architecture</title>
-      <link>http://localhost:1313/my-portfolio/posts/domain-specific-architecture/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/domain-specific-architecture/</link>
       <pubDate>Mon, 11 May 2026 14:52:52 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/domain-specific-architecture/</guid>
-      <description>&lt;p&gt;src/App.jsx lines 160–308 (getPreferredSemesterIndex, getSequenceScore, canPlaceCourse)&lt;/p&gt;
+      <guid>https://ngg-code.github.io/my-portfolio/posts/domain-specific-architecture/</guid>
+      <description>&lt;p&gt;src/App.jsx lines 160–308 (getPreferredSemesterIndex, getSequenceScore, canPlaceCourse)
+&lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;What aspects of your software architecture arise because of the domain?&lt;/p&gt;
 &lt;p&gt;The entire course placement layer exists solely because of the domain: academic scheduling has prerequisites (a directed dependency graph), term offerings (courses only exist in Fall or Spring), department enrollment caps (no more than 2 CSC courses/semester in years 1–2), and standing requirements. None of these constraints map onto generic CRUD patterns. The architecture adds a dedicated constraint validation layer (canPlaceCourse, lines 233–308) that sits between any user or algorithm action and the state mutation. Every course placement — manual or automated — passes through this layer before anything changes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Security</title>
-      <link>http://localhost:1313/my-portfolio/posts/security/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/security/</link>
       <pubDate>Mon, 11 May 2026 14:50:49 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/security/</guid>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/security/</guid>
       <description></description>
     </item>
     <item>
       <title>Collaboration</title>
-      <link>http://localhost:1313/my-portfolio/posts/collaboration/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/collaboration/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/collaboration/</guid>
-      <description>&lt;p&gt;Instance 1 — Code review of a pull request&lt;/p&gt;
-&lt;p&gt;Linda Jing opened Pull request to add the requirement logic to the SQL files and connect it to App.jsx. The review identified that the prerequisite logic needed adjustment to handle the case where a course appears in both a must_take block and an elective block — without duplication, the same course could satisfy two independent requirements simultaneously. The review comment resulted in the commit 2238a86 - revised pre req logic based on the code review where Linda updated the logic.&lt;/p&gt;</description>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/collaboration/</guid>
+      <description>&lt;p&gt;PR #1: &lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/pull/1&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/pull/1&lt;/a&gt;
+PR #3: &lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/pull/3&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/pull/3&lt;/a&gt;
+PR #4: &lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/pull/4&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/pull/4&lt;/a&gt;
+Commit 2238a86: &lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/commit/2238a86&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/commit/2238a86&lt;/a&gt;
+Commit 95b6b0c: &lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/commit/95b6b0c&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/commit/95b6b0c&lt;/a&gt;
+Commit 3dbb7d3: &lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/commit/3dbb7d3&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/commit/3dbb7d3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Instance 1 — Code Review of Pull Request #3&lt;/p&gt;
+&lt;p&gt;Linda opened pull request #3 (feature/requirement-logic-R) to add the requirement logic to the SQL files and connect it to the main application file. During the review, an issue was identified where the prerequisite logic did not account for a course appearing in both a required block and an elective block at the same time. Without handling this case, the same course could count toward two separate requirements simultaneously, which would allow a student&amp;rsquo;s plan to appear complete when it actually was not. The review comment was addressed and Linda pushed commit 2238a86 titled &amp;ldquo;revised pre req logic based on the code review&amp;rdquo; that corrected the logic.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Evaluation</title>
-      <link>http://localhost:1313/my-portfolio/posts/evaluation/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/evaluation/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/evaluation/</guid>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/evaluation/</guid>
       <description>&lt;p&gt;What was the design of your user study to evaluate your artifact?&lt;/p&gt;
 &lt;p&gt;After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: &amp;ldquo;Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.&amp;rdquo; Afterward we asked a short questions about what was confusing and what they would change.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Infrastructure</title>
-      <link>http://localhost:1313/my-portfolio/posts/infrastructure/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/infrastructure/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/infrastructure/</guid>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/infrastructure/</guid>
       <description>&lt;p&gt;What development tools did you use through the process to help write code and automate the build/deployment process?&lt;/p&gt;
 &lt;p&gt;The primary development tools were: Vite as the build tool and dev server (with hot module replacement making UI changes instantly visible without a full reload). Node.js + Express for the local API server, PostgreSQL for the database with SQL seed scripts loaded via psql, and Git + GitHub for version control and PR-based code review. npm run server and npm run dev are the two commands that together bring the full stack up locally.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Process</title>
-      <link>http://localhost:1313/my-portfolio/posts/process/</link>
-      <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/process/</guid>
-      <description>&lt;p&gt;What software engineering practices did your group employ to manage, distribute, and execute on their work?&lt;/p&gt;
-&lt;p&gt;The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests, and merges required a review before being merged into main. Work was distributed by component ownership — Linda Jing was primarily responsible for SQL schema, Drilon Qerimi focused on the backend, and I was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>Prototyping</title>
-      <link>http://localhost:1313/my-portfolio/posts/prototyping/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/prototyping/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/prototyping/</guid>
-      <description>&lt;p&gt;What design questions did you intend to answer with your prototypes?&lt;/p&gt;
-&lt;p&gt;Our prototypes aimed to answer two questions: (1) Is the semester grid layout intuitive as a way to enter and visualize a four-year plan? (2) Does showing requirement completion status before vs. after a user action help or distract students from planning?&lt;/p&gt;
-&lt;p&gt;How did you design your prototypes and subsequent user studies to address these questions?&lt;/p&gt;
-&lt;p&gt;We built a paper prototype of the 4×2 semester grid (four columns for two semesters per academic year, two rows for upper and lower half of the page) and tested it with three students. For the live-vs-on-demand question we built two versions of the requirements panel — one that updated after every course added and one that only updated when the user clicked &amp;ldquo;Check Requirements&amp;rdquo; — and alternated which version each test user saw first. We asked users to think aloud while filling in a sample plan and observed where they paused, re-read, or expressed confusion.&lt;/p&gt;</description>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/prototyping/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/1nzzsItmuu3anScEHo5nTgfloe13rnDAw117HdgLaP9Q/edit?tab=t.f7o757nux7cv&#34;&gt;https://docs.google.com/document/d/1nzzsItmuu3anScEHo5nTgfloe13rnDAw117HdgLaP9Q/edit?tab=t.f7o757nux7cv&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What design questions did you intend to answer with your prototypes?&lt;/p&gt;
+&lt;p&gt;Our prototypes were built around two core questions. The first was whether organizing the plan as a grid of semesters would feel natural to students, or whether it would require explanation before they could use it confidently. The second was whether showing requirement completion status updating in real time as courses were added would help students plan more effectively, or whether it would pull their attention away from the task of actually building their schedule and cause them to make worse decisions.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Self Learning</title>
-      <link>http://localhost:1313/my-portfolio/posts/self-learning/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/self-learning/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/self-learning/</guid>
-      <description>&lt;p&gt;Describe the technology that the tutorial addresses and how it fits into your project.&lt;/p&gt;
-&lt;p&gt;The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production bundle (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across hot updates.&lt;/p&gt;</description>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/self-learning/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/1nzzsItmuu3anScEHo5nTgfloe13rnDAw117HdgLaP9Q/edit?tab=t.f7o757nux7cv&#34;&gt;https://docs.google.com/document/d/1nzzsItmuu3anScEHo5nTgfloe13rnDAw117HdgLaP9Q/edit?tab=t.f7o757nux7cv&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Describe the technology that the tutorial addresses and how it fits into your project.&lt;/p&gt;
+&lt;p&gt;The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across new updates.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Abstraction</title>
-      <link>http://localhost:1313/my-portfolio/posts/abstraction/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/abstraction/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/abstraction/</guid>
-      <description>&lt;p&gt;src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)&lt;/p&gt;
-&lt;p&gt;function getBlockStatus(block) {
-const completedCourses = block.courseCodes.filter((c) =&amp;gt;
-plannedCourses.has(normalizeCourse(c)),
-);
-const completedCredits = completedCourses.reduce(
-(t, code) =&amp;gt; t + (courseMap[normalizeCourse(code)]?.credits || 0),
-0,
-);&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;if (block.code === &amp;quot;ANTH_FOUR_FIELDS&amp;quot;) {
-  const usedSubfields = new Set();
-  const usedCourses = [];
-  for (const code of plannedCourses) {
-    const course = courseMap[code];
-    if (!course || !code.startsWith(&amp;quot;ANT&amp;quot;) || getCourseNumber(code) &amp;lt; 200) continue;
-    for (const sf of course.subfields || []) usedSubfields.add(sf);
-    if (course.subfields?.length) usedCourses.push(code);
+      <guid>https://ngg-code.github.io/my-portfolio/posts/abstraction/</guid>
+      <description>&lt;p&gt;src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)
+&lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/components/major_requirements.jsx&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/components/major_requirements.jsx&lt;/a&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  function getBlockStatus(block) {
+    const completedCourses = block.courseCodes.filter((c) =&amp;gt;
+      plannedCourses.has(normalizeCourse(c)),
+    );
+    const completedCredits = completedCourses.reduce(
+      (t, code) =&amp;gt; t + (courseMap[normalizeCourse(code)]?.credits || 0),
+      0,
+    );
+
+    if (block.code === &amp;#34;ANTH_FOUR_FIELDS&amp;#34;) {
+      const usedSubfields = new Set();
+      const usedCourses = [];
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&amp;#34;ANT&amp;#34;) || getCourseNumber(code) &amp;lt; 200) continue;
+        for (const sf of course.subfields || []) usedSubfields.add(sf);
+        if (course.subfields?.length) usedCourses.push(code);
+      }
+      return { completed: usedSubfields.size &amp;gt;= 3, completedCourses: usedCourses, completedCredits: usedCourses.length * 4, detail: `${usedSubfields.size} / 3 subfields` };
+    }
+
+    if (block.code === &amp;#34;ANTH_ADV_PATH_B&amp;#34;) {
+      const hasThesis = plannedCourses.has(&amp;#34;ANT499&amp;#34;);
+      const adv = Array.from(plannedCourses).filter((c) =&amp;gt; c.startsWith(&amp;#34;ANT&amp;#34;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 300);
+      return { completed: hasThesis &amp;amp;&amp;amp; adv.length &amp;gt;= 1, completedCourses: [...adv, ...(hasThesis ? [&amp;#34;ANT499&amp;#34;] : [])], completedCredits: adv.length * 4 + (hasThesis ? 4 : 0) };
+    }
+
+    if (block.code === &amp;#34;CSC_ELECTIVE&amp;#34;) {
+      const requiredCodes = getUsedRequiredCourses();
+      const usedElectives = [];
+      let credits = 0;
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&amp;#34;CSC&amp;#34;)) continue;
+        if (requiredCodes.has(code) || [&amp;#34;CSC281&amp;#34;, &amp;#34;CSC282&amp;#34;].includes(code) || getCourseNumber(code) &amp;lt; 200) continue;
+        credits += code === &amp;#34;CSC326&amp;#34; ? Math.min(course.credits || 0, 2) : course.credits || 0;
+        usedElectives.push(code);
+      }
+      const sys = [&amp;#34;CSC211&amp;#34;, &amp;#34;CSC213&amp;#34;].filter((c) =&amp;gt; plannedCourses.has(c));
+      if (sys.length === 2) {
+        const extra = sys.find((c) =&amp;gt; !usedElectives.includes(c));
+        if (extra) { credits += courseMap[extra]?.credits || 0; usedElectives.push(extra); }
+      }
+      return { completed: credits &amp;gt;= (block.minCredits || 4), completedCourses: usedElectives, completedCredits: credits, detail: `${credits} / ${block.minCredits || 4} cr` };
+    }
+
+    if (block.code === &amp;#34;CSC_MATH_ELECTIVE&amp;#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&amp;gt; (c.startsWith(&amp;#34;MAT&amp;#34;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt; 131) || c.startsWith(&amp;#34;STA&amp;#34;),
+      );
+      return { completed: used.length &amp;gt;= 1, completedCourses: used, completedCredits: used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0) };
+    }
+
+    if (block.code === &amp;#34;CSC_TOTALS_AND_POLICIES&amp;#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&amp;gt; (c.startsWith(&amp;#34;CSC&amp;#34;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 151) || [&amp;#34;MAT208&amp;#34;, &amp;#34;MAT218&amp;#34;].includes(c),
+      );
+      const credits = used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0);
+      return { completed: credits &amp;gt;= (block.minCredits || 32), completedCourses: used, completedCredits: credits, detail: `${credits} / ${block.minCredits || 32} cr` };
+    }
+
+    if (block.ruleType === &amp;#34;must_take&amp;#34;) return { completed: block.courseCodes.length &amp;gt; 0 &amp;amp;&amp;amp; completedCourses.length === block.courseCodes.length, completedCourses, completedCredits };
+    if (block.ruleType === &amp;#34;choose_one&amp;#34;) return { completed: completedCourses.length &amp;gt;= 1, completedCourses, completedCredits };
+    if (block.ruleType === &amp;#34;choose_n&amp;#34;) return { completed: completedCourses.length &amp;gt;= (block.minCount || 1), completedCourses, completedCredits };
+    if (block.ruleType === &amp;#34;choose_credits&amp;#34;) return { completed: completedCredits &amp;gt;= (block.minCredits || 0), completedCourses, completedCredits };
+    return { completed: false, completedCourses, completedCredits };
   }
-  return { completed: usedSubfields.size &amp;gt;= 3, completedCourses: usedCourses, completedCredits: usedCourses.length * 4, detail: `${usedSubfields.size} / 3 subfields` };
-}
-
-if (block.code === &amp;quot;ANTH_ADV_PATH_B&amp;quot;) {
-  const hasThesis = plannedCourses.has(&amp;quot;ANT499&amp;quot;);
-  const adv = Array.from(plannedCourses).filter((c) =&amp;gt; c.startsWith(&amp;quot;ANT&amp;quot;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 300);
-  return { completed: hasThesis &amp;amp;&amp;amp; adv.length &amp;gt;= 1, completedCourses: [...adv, ...(hasThesis ? [&amp;quot;ANT499&amp;quot;] : [])], completedCredits: adv.length * 4 + (hasThesis ? 4 : 0) };
-}
-
-if (block.code === &amp;quot;CSC_ELECTIVE&amp;quot;) {
-  const requiredCodes = getUsedRequiredCourses();
-  const usedElectives = [];
-  let credits = 0;
-  for (const code of plannedCourses) {
-    const course = courseMap[code];
-    if (!course || !code.startsWith(&amp;quot;CSC&amp;quot;)) continue;
-    if (requiredCodes.has(code) || [&amp;quot;CSC281&amp;quot;, &amp;quot;CSC282&amp;quot;].includes(code) || getCourseNumber(code) &amp;lt; 200) continue;
-    credits += code === &amp;quot;CSC326&amp;quot; ? Math.min(course.credits || 0, 2) : course.credits || 0;
-    usedElectives.push(code);
-  }
-  const sys = [&amp;quot;CSC211&amp;quot;, &amp;quot;CSC213&amp;quot;].filter((c) =&amp;gt; plannedCourses.has(c));
-  if (sys.length === 2) {
-    const extra = sys.find((c) =&amp;gt; !usedElectives.includes(c));
-    if (extra) { credits += courseMap[extra]?.credits || 0; usedElectives.push(extra); }
-  }
-  return { completed: credits &amp;gt;= (block.minCredits || 4), completedCourses: usedElectives, completedCredits: credits, detail: `${credits} / ${block.minCredits || 4} cr` };
-}
-
-if (block.code === &amp;quot;CSC_MATH_ELECTIVE&amp;quot;) {
-  const used = Array.from(plannedCourses).filter(
-    (c) =&amp;gt; (c.startsWith(&amp;quot;MAT&amp;quot;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt; 131) || c.startsWith(&amp;quot;STA&amp;quot;),
-  );
-  return { completed: used.length &amp;gt;= 1, completedCourses: used, completedCredits: used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0) };
-}
-
-if (block.code === &amp;quot;CSC_TOTALS_AND_POLICIES&amp;quot;) {
-  const used = Array.from(plannedCourses).filter(
-    (c) =&amp;gt; (c.startsWith(&amp;quot;CSC&amp;quot;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 151) || [&amp;quot;MAT208&amp;quot;, &amp;quot;MAT218&amp;quot;].includes(c),
-  );
-  const credits = used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0);
-  return { completed: credits &amp;gt;= (block.minCredits || 32), completedCourses: used, completedCredits: credits, detail: `${credits} / ${block.minCredits || 32} cr` };
-}
-
-if (block.ruleType === &amp;quot;must_take&amp;quot;) return { completed: block.courseCodes.length &amp;gt; 0 &amp;amp;&amp;amp; completedCourses.length === block.courseCodes.length, completedCourses, completedCredits };
-if (block.ruleType === &amp;quot;choose_one&amp;quot;) return { completed: completedCourses.length &amp;gt;= 1, completedCourses, completedCredits };
-if (block.ruleType === &amp;quot;choose_n&amp;quot;) return { completed: completedCourses.length &amp;gt;= (block.minCount || 1), completedCourses, completedCredits };
-if (block.ruleType === &amp;quot;choose_credits&amp;quot;) return { completed: completedCredits &amp;gt;= (block.minCredits || 0), completedCourses, completedCredits };
-return { completed: false, completedCourses, completedCredits };
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;}&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;What functionality does your code sample abstract away?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Architecture</title>
-      <link>http://localhost:1313/my-portfolio/posts/architecture/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/architecture/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/architecture/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Medium-Scale Architecture&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;src/App.jsx (lines 34–82), server/index.js, src/components/semestersTable.jsx, src/components/major_requirements.jsx&lt;/p&gt;
-&lt;p&gt;What architectural pattern does your program employ?&lt;/p&gt;
-&lt;p&gt;The project uses a REST API + Single Page Application (SPA) pattern. The backend exposes a stateless JSON API over HTTP; the frontend is a React SPA that fetches from those endpoints and manages all interactive state locally. This is a client-server separation where neither side knows about the other&amp;rsquo;s internal structure — the server just returns JSON, and the client just consumes it.&lt;/p&gt;</description>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/architecture/</guid>
+      <description>&lt;p&gt;src/App.jsx (lines 34–82), server/index.js, src/components/semestersTable.jsx, src/components/major_requirements.jsx
+&lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx&lt;/a&gt;
+&lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/blob/main/server/index.js&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/blob/main/server/index.js&lt;/a&gt;
+&lt;a href=&#34;https://github.com/StudiousSquirrels/4yearplanner/blob/main/vite.config.js&#34;&gt;https://github.com/StudiousSquirrels/4yearplanner/blob/main/vite.config.js&lt;/a&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  const [orGroupSelections, setOrGroupSelections] = useState({});
+
+  useEffect(() =&amp;gt; {
+    async function loadPlannerData() {
+      try {
+        const [coursesResponse, majorsResponse] = await Promise.all([
+          fetch(&amp;#34;/api/courses&amp;#34;),
+          fetch(&amp;#34;/api/majors&amp;#34;),
+        ]);
+
+        if (!coursesResponse.ok || !majorsResponse.ok) {
+          throw new Error(&amp;#34;Could not load planner data from SQL.&amp;#34;);
+        }
+
+        const [courses, majorsList] = await Promise.all([
+          coursesResponse.json(),
+          majorsResponse.json(),
+        ]);
+
+        setCoursesData(courses);
+        setMajors(majorsList.majors);
+      } catch (error) {
+        setLoadError(error.message);
+      }
+    }
+
+    loadPlannerData();
+  }, []);
+
+  useEffect(() =&amp;gt; {
+    async function loadMajorRequirements() {
+      try {
+        setLoadError(&amp;#34;&amp;#34;);
+        setMajorRequirements(null);
+
+        const requirementsResponse = await fetch(
+          `/api/majors/${selectedMajorCode}/requirements`,
+        );
+
+        if (!requirementsResponse.ok) {
+          throw new Error(&amp;#34;Could not load major requirements from SQL.&amp;#34;);
+        }
+
+        setMajorRequirements(await requirementsResponse.json());
+      } catch (error) {
+        setLoadError(error.message);
+      }
+    }
+
+    loadMajorRequirements();
+  }, [selectedMajorCode]);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;What architectural pattern does your program employ?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Needfinding</title>
-      <link>http://localhost:1313/my-portfolio/posts/needfinding/</link>
+      <link>https://ngg-code.github.io/my-portfolio/posts/needfinding/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/needfinding/</guid>
-      <description>&lt;p&gt;What techniques did you employ to discover users&amp;rsquo; needs?&lt;/p&gt;
-&lt;p&gt;The team conducted informal interviews with Grinnell students — specifically students who had recently gone through the process of planning their four-year course schedule. Conversations focused on pain points with the existing tools (the registrar&amp;rsquo;s worksheet and the catalog PDF), how students currently track prerequisites, and where they felt uncertain about whether they were on track for their major. We also observed how students currently lay out their plans using spreadsheets or handwritten grids.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Testing Infrastructure</title>
-      <link>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</link>
-      <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Testing Strategies</title>
-      <link>http://localhost:1313/my-portfolio/posts/testing-strategies/</link>
-      <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
-      <guid>http://localhost:1313/my-portfolio/posts/testing-strategies/</guid>
-      <description></description>
+      <guid>https://ngg-code.github.io/my-portfolio/posts/needfinding/</guid>
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Answers (Mihail (Misho) Palmov):
+1. 3rd year
+2. Physics and Chemistry
+3. Before starting school at Grinnell I had no information on course planning and did not know how I would structure my degree.
+4. I looked at the major requirements, when I was declaring my majors, and did my best to fit all the classes I needed in a way that would not make my schedule too hectic.
+5. I used the major declaration form and separate sheets of paper to write different versions of my 4-year plan.
+6. Before talking to my advisors, my 4-year plan was very tentative and was only based on the few classes I knew I had to take. In my initial 4-year plan, I did not think about courses, outside of my majors very much.
+7. Not knowing if I will be able to get into certain classes, that I either need for my major or want to take. As an example, in my four-year plan I was going to take two STEM and two humanities classes this semester, however I was cut from both of my humanities and could only find one other non-STEM course that matched my schedule. The fact that my four-year plan is subject to change every semester and has to be flexible to accommodate that is very frustrating.
+8. No, typically prerequisites are well explained, and so are major requirements. I have, however, had trouble with repeatedly having to get prerequisites waived, as I came in with outside credit. While this didn&amp;#39;t affect my four-year plan it makes course registration slightly more stressful.
+9. I have had to change my four-year plan every semester since I first made it.
+10. I have changed my four-year plan once because the classes I was taking make the workload too much (planning error on my part), and because I did not get into some of my classes another time.
+11. It is fairly easy to tell that I&amp;#39;m on track both thanks to my advisors, who are always clear on my progress, and thanks to Colleague Self-Service, which nicely presents my progress .
+12. I go back to my academic transcript or Colleague Self-Service and compare it with the major requirements.
+13. Having a good, flexible plan for my four years is very calming and generally helpful. The problem for me is that this plan is more-so a theoretical proof-of-concept that I can complete my major, rather than a plan that is set in stone. 
+14. Typically no, I try to plan things early on so that I know they are feasible and I don&amp;#39;t have to figure them out last minute.
+16. I think it would be helpful to stress more on your four year plan early on in your First Year, as it gives a good template to follow in our next three years.
+17. Knowing when exactly classes are taking place and what the class sizes are earlier on, so that I know when there are overlaps in my four-year plan and how likely I am to actually get the classes I am planning to take
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;What techniques did you employ to discover users&amp;rsquo; needs?&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

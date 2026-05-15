@@ -6,7 +6,7 @@ title = 'Ideation'
 
 What techniques did you use to discover solutions to users' needs?
 
-After gathering insights from the needfinding interviews, I focused on the two biggest pain points that came up consistently: not knowing whether a course sequence was valid and having to manually cross-reference the catalog to check major progress. I used these as anchors for sketching out possible solutions, evaluating each idea by asking whether it actually addressed those frustrations or just added complexity without solving the core problem. 
+After getting information from the needfinding interviews, I focused on the two biggest pain points that came up consistently: not knowing whether a course sequence was valid and having to manually cross-reference the catalog to check major progress. I used these for sketching out possible solutions, evaluating each idea by asking whether it actually addressed those frustrations or just added complexity without solving the core problem. 
 
 What solution or solutions did you ultimately pursue and why did you choose them?
 

@@ -14,12 +14,7 @@
       <pubDate>Mon, 11 May 2026 14:59:15 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/quality/</guid>
       <description>&lt;p&gt;Where the codebase exemplifies engineering excellence:&lt;/p&gt;
-&lt;p&gt;Single source of truth for course validation.&lt;/p&gt;
-&lt;p&gt;canPlaceCourse (src/App.jsx:233–308) is called by both the manual selection path and the auto-fill algorithm. There is no duplicate prerequisite-checking code anywhere.
-Normalized data access. normalizeCourse is defined once and used consistently everywhere course codes are compared — it handles the CSC-151 vs CSC151 vs csc 151 variations that arise from different data sources. Without it, course lookups would silently fail on format mismatches.
-Parameterized SQL throughout. Every query in server/index.js uses $1/$2 placeholders, eliminating SQL injection as a vulnerability class.
-Component boundaries are clean. SemestersTable and MajorRequirements are fully controlled components: they own no authoritative state, accept data via props, and communicate upward through callbacks. This makes their behavior completely predictable from the outside.
-The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–189) solves the topological ordering problem with a simple function rather than a full graph traversal — adequate for the domain size and much easier to reason about.&lt;/p&gt;</description>
+&lt;p&gt;Single source of truth for course validation. All course placement logic, including prerequisite checking, term offering restrictions, and enrollment caps, lives in one single function that is called by both the manual course selection path and the automatic fill algorithm. There is no duplicate validation code anywhere in the project, which means that fixing a bug or adding a new rule only ever needs to happen in one place and is guaranteed to apply everywhere the validation is used.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Accessible Design</title>
@@ -34,17 +29,16 @@ The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–
       <pubDate>Mon, 11 May 2026 14:54:22 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/ui-design/</guid>
       <description>&lt;p&gt;src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)&lt;/p&gt;
-&lt;p&gt;Visibility of system status :&lt;/p&gt;
-&lt;p&gt;Status dots change from gray → green/red only after &amp;ldquo;Check Requirements&amp;rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&amp;rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: &amp;ldquo;width 0.4s ease&amp;rdquo;), showing that a state change just occurred.&lt;/p&gt;
-&lt;p&gt;Direct manipulation:&lt;/p&gt;
-&lt;p&gt;Clicking a semester slot transforms it in-place into a &lt;!-- raw HTML omitted --&gt; dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.&lt;/p&gt;</description>
+&lt;p&gt;Visibility of System Status&lt;/p&gt;
+&lt;p&gt;One of the core interaction design principles is that a system should always keep users informed about what is happening and what the system currently knows. The requirements panel was designed with this principle at its center. When a student first loads the application or is in the middle of building their plan, all the status indicators in the requirements panel appear in a neutral gray color. This is intentional. The gray state communicates clearly that the system has not yet evaluated the plan and is not making any claims about whether requirements are met or not. Only after the student explicitly clicks the Check Requirements button do the indicators change, with completed blocks turning green and incomplete ones turning red, and the progress bar animating to reflect the current completion percentage. The animated transition on the progress bar reinforces the fact that a meaningful state change just occurred and draws the eye to the updated information. This two-stage design, where the system stays neutral until explicitly asked to evaluate, prevents students from being misled by partial information while they are still in the middle of editing their plan.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Testing Technologies</title>
       <link>http://localhost:1313/my-portfolio/posts/testing-technologies/</link>
       <pubDate>Mon, 11 May 2026 14:53:54 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/testing-technologies/</guid>
-      <description></description>
+      <description>&lt;p&gt;What advanced testing tool or technology did you employ in your code?&lt;/p&gt;
+&lt;p&gt;The testing suite uses two tools working together: Vitest as the test runner and React Testing Library as the component testing framework. Vitest is a modern testing framework built specifically for projects that use Vite, which means it shares the same configuration and module resolution as the rest of the project without needing a separate build pipeline for tests. React Testing Library is a library designed around the principle that tests should interact with components the same way a real user would, by looking for visible text, headings, and elements on screen rather than poking at internal state or implementation details. The two tools are installed as development dependencies in package.json and configured through vite.config.js and the setup file at src/test/setup.js.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Domain Specific Architecture</title>
@@ -67,8 +61,8 @@ The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–
       <link>http://localhost:1313/my-portfolio/posts/collaboration/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/collaboration/</guid>
-      <description>&lt;p&gt;Instance 1 — Code review of a pull request&lt;/p&gt;
-&lt;p&gt;Linda Jing opened Pull request to add the requirement logic to the SQL files and connect it to App.jsx. The review identified that the prerequisite logic needed adjustment to handle the case where a course appears in both a must_take block and an elective block — without duplication, the same course could satisfy two independent requirements simultaneously. The review comment resulted in the commit 2238a86 - revised pre req logic based on the code review where Linda updated the logic.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Instance 1 — Code Review of a Pull Request&lt;/p&gt;
+&lt;p&gt;Linda opened a pull request to add the requirement logic to the SQL files and connect it to the main application file. During the review, an issue was identified where the prerequisite logic did not account for a course appearing in both a required block and an elective block at the same time. Without handling this case, the same course could count toward two separate requirements simultaneously, which would allow a student&amp;rsquo;s plan to appear complete when it actually was not. The review comment was addressed and Linda pushed an updated commit that corrected the logic.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Evaluation</title>
@@ -92,14 +86,15 @@ The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/process/</guid>
       <description>&lt;p&gt;What software engineering practices did your group employ to manage, distribute, and execute on their work?&lt;/p&gt;
-&lt;p&gt;The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests, and merges required a review before being merged into main. Work was distributed by component ownership — Linda Jing was primarily responsible for SQL schema, Drilon Qerimi focused on the backend, and I was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.&lt;/p&gt;</description>
+&lt;p&gt;The team used GitHub as the central hub for all collaboration. All development work happened on separate feature branches so that changes could be reviewed and tested before being brought into the main codebase. When a feature was ready, it was submitted as a pull request that required at least one teammate to look over before merging. This gave everyone visibility into what was changing and created a natural checkpoint to catch problems before they affected the shared codebase. Work was also distributed by area of ownership so that teammates could move quickly without constantly stepping on each other. Linda Jing was primarily responsible for the SQL schema and the data that powered the backend, Drilon Qerimi focused on the backend server and its connection to the database, and I was primarily responsible for the requirements panel component and the overall visual design of the application including the branded header, campus banner, and the collapsible tree layout.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Prototyping</title>
       <link>http://localhost:1313/my-portfolio/posts/prototyping/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/prototyping/</guid>
-      <description></description>
+      <description>&lt;p&gt;What design questions did you intend to answer with your prototypes?&lt;/p&gt;
+&lt;p&gt;Our prototypes were built around two core questions. The first was whether organizing the plan as a grid of semesters would feel natural to students, or whether it would require explanation before they could use it confidently. The second was whether showing requirement completion status updating in real time as courses were added would help students plan more effectively, or whether it would pull their attention away from the task of actually building their schedule and cause them to make worse decisions.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Self Learning</title>
@@ -107,7 +102,7 @@ The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/self-learning/</guid>
       <description>&lt;p&gt;Describe the technology that the tutorial addresses and how it fits into your project.&lt;/p&gt;
-&lt;p&gt;The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production bundle (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across hot updates.&lt;/p&gt;</description>
+&lt;p&gt;The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across new updates.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Abstraction</title>
@@ -115,8 +110,74 @@ The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/abstraction/</guid>
       <description>&lt;p&gt;src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)&lt;/p&gt;
-&lt;p&gt;What functionality does your code sample abstract away?&lt;/p&gt;
-&lt;p&gt;getBlockStatus() abstracts away all the logic for determining whether a major requirement block has been satisfied. Callers never need to know what rule type a block is (must_take, choose_one, choose_n, choose_credits, or special cases like ANTH_FOUR_FIELDS). They simply pass in a block object and receive back a uniform { completed, completedCourses, completedCredits, detail } result.&lt;/p&gt;</description>
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  function getBlockStatus(block) {
+    const completedCourses = block.courseCodes.filter((c) =&amp;gt;
+      plannedCourses.has(normalizeCourse(c)),
+    );
+    const completedCredits = completedCourses.reduce(
+      (t, code) =&amp;gt; t + (courseMap[normalizeCourse(code)]?.credits || 0),
+      0,
+    );
+
+    if (block.code === &amp;#34;ANTH_FOUR_FIELDS&amp;#34;) {
+      const usedSubfields = new Set();
+      const usedCourses = [];
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&amp;#34;ANT&amp;#34;) || getCourseNumber(code) &amp;lt; 200) continue;
+        for (const sf of course.subfields || []) usedSubfields.add(sf);
+        if (course.subfields?.length) usedCourses.push(code);
+      }
+      return { completed: usedSubfields.size &amp;gt;= 3, completedCourses: usedCourses, completedCredits: usedCourses.length * 4, detail: `${usedSubfields.size} / 3 subfields` };
+    }
+
+    if (block.code === &amp;#34;ANTH_ADV_PATH_B&amp;#34;) {
+      const hasThesis = plannedCourses.has(&amp;#34;ANT499&amp;#34;);
+      const adv = Array.from(plannedCourses).filter((c) =&amp;gt; c.startsWith(&amp;#34;ANT&amp;#34;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 300);
+      return { completed: hasThesis &amp;amp;&amp;amp; adv.length &amp;gt;= 1, completedCourses: [...adv, ...(hasThesis ? [&amp;#34;ANT499&amp;#34;] : [])], completedCredits: adv.length * 4 + (hasThesis ? 4 : 0) };
+    }
+
+    if (block.code === &amp;#34;CSC_ELECTIVE&amp;#34;) {
+      const requiredCodes = getUsedRequiredCourses();
+      const usedElectives = [];
+      let credits = 0;
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&amp;#34;CSC&amp;#34;)) continue;
+        if (requiredCodes.has(code) || [&amp;#34;CSC281&amp;#34;, &amp;#34;CSC282&amp;#34;].includes(code) || getCourseNumber(code) &amp;lt; 200) continue;
+        credits += code === &amp;#34;CSC326&amp;#34; ? Math.min(course.credits || 0, 2) : course.credits || 0;
+        usedElectives.push(code);
+      }
+      const sys = [&amp;#34;CSC211&amp;#34;, &amp;#34;CSC213&amp;#34;].filter((c) =&amp;gt; plannedCourses.has(c));
+      if (sys.length === 2) {
+        const extra = sys.find((c) =&amp;gt; !usedElectives.includes(c));
+        if (extra) { credits += courseMap[extra]?.credits || 0; usedElectives.push(extra); }
+      }
+      return { completed: credits &amp;gt;= (block.minCredits || 4), completedCourses: usedElectives, completedCredits: credits, detail: `${credits} / ${block.minCredits || 4} cr` };
+    }
+
+    if (block.code === &amp;#34;CSC_MATH_ELECTIVE&amp;#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&amp;gt; (c.startsWith(&amp;#34;MAT&amp;#34;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt; 131) || c.startsWith(&amp;#34;STA&amp;#34;),
+      );
+      return { completed: used.length &amp;gt;= 1, completedCourses: used, completedCredits: used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0) };
+    }
+
+    if (block.code === &amp;#34;CSC_TOTALS_AND_POLICIES&amp;#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&amp;gt; (c.startsWith(&amp;#34;CSC&amp;#34;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 151) || [&amp;#34;MAT208&amp;#34;, &amp;#34;MAT218&amp;#34;].includes(c),
+      );
+      const credits = used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0);
+      return { completed: credits &amp;gt;= (block.minCredits || 32), completedCourses: used, completedCredits: credits, detail: `${credits} / ${block.minCredits || 32} cr` };
+    }
+
+    if (block.ruleType === &amp;#34;must_take&amp;#34;) return { completed: block.courseCodes.length &amp;gt; 0 &amp;amp;&amp;amp; completedCourses.length === block.courseCodes.length, completedCourses, completedCredits };
+    if (block.ruleType === &amp;#34;choose_one&amp;#34;) return { completed: completedCourses.length &amp;gt;= 1, completedCourses, completedCredits };
+    if (block.ruleType === &amp;#34;choose_n&amp;#34;) return { completed: completedCourses.length &amp;gt;= (block.minCount || 1), completedCourses, completedCredits };
+    if (block.ruleType === &amp;#34;choose_credits&amp;#34;) return { completed: completedCredits &amp;gt;= (block.minCredits || 0), completedCourses, completedCredits };
+    return { completed: false, completedCourses, completedCredits };
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;What functionality does your code sample abstract away?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Architecture</title>
@@ -125,30 +186,99 @@ The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–
       <guid>http://localhost:1313/my-portfolio/posts/architecture/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Medium-Scale Architecture&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;src/App.jsx (lines 34–82), server/index.js, src/components/semestersTable.jsx, src/components/major_requirements.jsx&lt;/p&gt;
-&lt;p&gt;What architectural pattern does your program employ?&lt;/p&gt;
-&lt;p&gt;The project uses a REST API + Single Page Application (SPA) pattern. The backend exposes a stateless JSON API over HTTP; the frontend is a React SPA that fetches from those endpoints and manages all interactive state locally. This is a client-server separation where neither side knows about the other&amp;rsquo;s internal structure — the server just returns JSON, and the client just consumes it.&lt;/p&gt;</description>
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  const [orGroupSelections, setOrGroupSelections] = useState({});
+
+  useEffect(() =&amp;gt; {
+    async function loadPlannerData() {
+      try {
+        const [coursesResponse, majorsResponse] = await Promise.all([
+          fetch(&amp;#34;/api/courses&amp;#34;),
+          fetch(&amp;#34;/api/majors&amp;#34;),
+        ]);
+
+        if (!coursesResponse.ok || !majorsResponse.ok) {
+          throw new Error(&amp;#34;Could not load planner data from SQL.&amp;#34;);
+        }
+
+        const [courses, majorsList] = await Promise.all([
+          coursesResponse.json(),
+          majorsResponse.json(),
+        ]);
+
+        setCoursesData(courses);
+        setMajors(majorsList.majors);
+      } catch (error) {
+        setLoadError(error.message);
+      }
+    }
+
+    loadPlannerData();
+  }, []);
+
+  useEffect(() =&amp;gt; {
+    async function loadMajorRequirements() {
+      try {
+        setLoadError(&amp;#34;&amp;#34;);
+        setMajorRequirements(null);
+
+        const requirementsResponse = await fetch(
+          `/api/majors/${selectedMajorCode}/requirements`,
+        );
+
+        if (!requirementsResponse.ok) {
+          throw new Error(&amp;#34;Could not load major requirements from SQL.&amp;#34;);
+        }
+
+        setMajorRequirements(await requirementsResponse.json());
+      } catch (error) {
+        setLoadError(error.message);
+      }
+    }
+
+    loadMajorRequirements();
+  }, [selectedMajorCode]);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;What architectural pattern does your program employ?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Needfinding</title>
       <link>http://localhost:1313/my-portfolio/posts/needfinding/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/needfinding/</guid>
-      <description>&lt;p&gt;What techniques did you employ to discover users&amp;rsquo; needs?&lt;/p&gt;
-&lt;p&gt;The team conducted informal interviews with Grinnell students — specifically students who had recently gone through the process of planning their four-year course schedule. Conversations focused on pain points with the existing tools (the registrar&amp;rsquo;s worksheet and the catalog PDF), how students currently track prerequisites, and where they felt uncertain about whether they were on track for their major. We also observed how students currently lay out their plans using spreadsheets or handwritten grids.&lt;/p&gt;</description>
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Answers (Mihail (Misho) Palmov):
+1. 3rd year
+2. Physics and Chemistry
+3. Before starting school at Grinnell I had no information on course planning and did not know how I would structure my degree.
+4. I looked at the major requirements, when I was declaring my majors, and did my best to fit all the classes I needed in a way that would not make my schedule too hectic.
+5. I used the major declaration form and separate sheets of paper to write different versions of my 4-year plan.
+6. Before talking to my advisors, my 4-year plan was very tentative and was only based on the few classes I knew I had to take. In my initial 4-year plan, I did not think about courses, outside of my majors very much.
+7. Not knowing if I will be able to get into certain classes, that I either need for my major or want to take. As an example, in my four-year plan I was going to take two STEM and two humanities classes this semester, however I was cut from both of my humanities and could only find one other non-STEM course that matched my schedule. The fact that my four-year plan is subject to change every semester and has to be flexible to accommodate that is very frustrating.
+8. No, typically prerequisites are well explained, and so are major requirements. I have, however, had trouble with repeatedly having to get prerequisites waived, as I came in with outside credit. While this didn&amp;#39;t affect my four-year plan it makes course registration slightly more stressful.
+9. I have had to change my four-year plan every semester since I first made it.
+10. I have changed my four-year plan once because the classes I was taking make the workload too much (planning error on my part), and because I did not get into some of my classes another time.
+11. It is fairly easy to tell that I&amp;#39;m on track both thanks to my advisors, who are always clear on my progress, and thanks to Colleague Self-Service, which nicely presents my progress .
+12. I go back to my academic transcript or Colleague Self-Service and compare it with the major requirements.
+13. Having a good, flexible plan for my four years is very calming and generally helpful. The problem for me is that this plan is more-so a theoretical proof-of-concept that I can complete my major, rather than a plan that is set in stone. 
+14. Typically no, I try to plan things early on so that I know they are feasible and I don&amp;#39;t have to figure them out last minute.
+16. I think it would be helpful to stress more on your four year plan early on in your First Year, as it gives a good template to follow in our next three years.
+17. Knowing when exactly classes are taking place and what the class sizes are earlier on, so that I know when there are overlaps in my four-year plan and how likely I am to actually get the classes I am planning to take
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;What techniques did you employ to discover users&amp;rsquo; needs?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Testing Infrastructure</title>
       <link>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</guid>
-      <description></description>
+      <description>&lt;p&gt;How have you automated your tests so that they both take one click to run and run automatically as part of build validation?&lt;/p&gt;
+&lt;p&gt;The testing infrastructure is built on Vitest, which plugs directly into the existing Vite build setup through vite.config.js. A test block was added to that file specifying jsdom as the rendering environment and pointing to a setup file at src/test/setup.js that imports @testing-library/jest-dom to enable matchers like toBeInTheDocument. Two scripts were added to package.json: npm run test starts Vitest in watch mode, where it automatically re-runs all affected tests every time a file is saved, giving immediate feedback during development without any manual action. npm run coverage runs the full suite once and prints a coverage table broken down by statements, branches, functions, and lines for every file in the components folder. Because Vitest shares its configuration with Vite, there is no duplication between the build config and the test config and both tools stay in sync automatically.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Testing Strategies</title>
       <link>http://localhost:1313/my-portfolio/posts/testing-strategies/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/testing-strategies/</guid>
-      <description></description>
+      <description>&lt;p&gt;Sample: src/components/major_requirements.test.jsx&lt;/p&gt;
+&lt;p&gt;According to code coverage tools, what aspects of this component are covered with tests?&lt;/p&gt;
+&lt;p&gt;The component I was responsible for testing is MajorRequirements. Running npm run coverage produced the following results for major_requirements.jsx: 54% of statements, 56% of branches, and 60% of functions are covered. The tests cover the following aspects of the component: the initial unchecked state where all indicators are neutral and the hint message is visible, the evaluation of must_take blocks where the required course must be present in the plan, choose_one blocks where any single option satisfies the requirement, choose_n blocks where a minimum number of courses must be planned, and the special ANTH_FOUR_FIELDS block that checks breadth across academic subfields rather than a simple course count. The collapsible tree interaction is also covered, verifying that clicking a block row hides and reveals its course list independently of other blocks, and that course names and notes render correctly.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

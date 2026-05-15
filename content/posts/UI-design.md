@@ -1,19 +1,19 @@
 +++
 date = '2026-05-11T14:54:22-05:00'
-draft = false
+draft = true
 title = 'UI Design'
 +++
 
 src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
 
-Visibility of system status : 
+Visibility of System Status
 
-Status dots change from gray → green/red only after "Check Requirements" is clicked, giving explicit feedback about what the system knows vs. what it hasn't evaluated. The progress bar shows the correct percentage (line 191: transition: "width 0.4s ease"), showing that a state change just occurred.
+One of the core interaction design principles is that a system should always keep users informed about what is happening and what the system currently knows. The requirements panel was designed with this principle at its center. When a student first loads the application or is in the middle of building their plan, all the status indicators in the requirements panel appear in a neutral gray color. This is intentional. The gray state communicates clearly that the system has not yet evaluated the plan and is not making any claims about whether requirements are met or not. Only after the student explicitly clicks the Check Requirements button do the indicators change, with completed blocks turning green and incomplete ones turning red, and the progress bar animating to reflect the current completion percentage. The animated transition on the progress bar reinforces the fact that a meaningful state change just occurred and draws the eye to the updated information. This two-stage design, where the system stays neutral until explicitly asked to evaluate, prevents students from being misled by partial information while they are still in the middle of editing their plan.
 
-Direct manipulation: 
+Direct Manipulation
 
-Clicking a semester slot transforms it in-place into a <select> dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.
+Another core principle of interaction design is that users should be able to interact with objects directly rather than having to operate on them through separate controls elsewhere on the page. The semester grid was built with this in mind. Each course slot in the grid looks like a simple tile that the student can click on, and the moment they do, that tile transforms directly into a dropdown menu in place. There is no separate edit button, no modal window that opens, and no form that appears somewhere else on the screen. The slot itself becomes the input. This makes the interaction feel immediate and connected to the object being changed, which is exactly what direct manipulation is meant to achieve. Once a course is selected, the dropdown closes and the slot returns to its resting state showing the chosen course, completing the interaction cleanly.
 
-Alternative considered and why current design prevail: 
+Alternative Design Considered and Why the Current Design Prevailed
 
-A flat checklist (one row per requirement, all always visible) was considered, but we didn't like it because it violates the minimalist design principle — a student with 18 requirement blocks visible simultaneously while also editing their plan loses focus on the planning task. The collapsible tree (line 270) allows completed blocks to be collapsed away, keeping attention on what's incomplete. The tree also exposes the parent-child relationship between blocks and individual courses, which a flat list cannot represent.
+Early in the design process, a flat checklist was considered as the format for the requirements panel. In this version every requirement block would always be visible as a simple row with a checkbox, giving students a complete overview of all their requirements at once. While this has the advantage of showing everything in one place, it creates a significant problem in practice. A student working through a Computer Science or Anthropology major can have upward of eighteen separate requirement blocks. Displaying all of them simultaneously while the student is also trying to think about course sequencing in the semester grid creates an overwhelming amount of information on screen at the same time. Research in interaction design consistently shows that presenting too many elements at once increases cognitive load and reduces the quality of the decisions users make. The collapsible tree structure addresses this directly by allowing students to collapse blocks they have already completed, keeping the visible portion of the panel focused on what still needs attention. The tree format also captures something a flat checklist fundamentally cannot represent, which is the relationship between a requirement block and the individual courses that can satisfy it. In the tree view a student can expand any block to see exactly which courses count toward it and which ones they have already planned, giving them the context they need to make informed decisions without having to cross-reference the catalog separately.

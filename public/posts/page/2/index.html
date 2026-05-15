@@ -114,10 +114,18 @@
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Prototyping
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>What design questions did you intend to answer with your prototypes?
+Our prototypes were built around two core questions. The first was whether organizing the plan as a grid of semesters would feel natural to students, or whether it would require explanation before they could use it confidently. The second was whether showing requirement completion status updating in real time as courses were added would help students plan more effectively, or whether it would pull their attention away from the task of actually building their schedule and cause them to make worse decisions.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Prototyping" href="http://localhost:1313/my-portfolio/posts/prototyping/"></a>
@@ -136,7 +144,7 @@
   </header>
   <div class="entry-content">
     <p>Describe the technology that the tutorial addresses and how it fits into your project.
-The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production bundle (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across hot updates.
+The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across new updates.
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
@@ -156,8 +164,7 @@ The tech tutorial covered Vite as a modern frontend build tool and development s
   </header>
   <div class="entry-content">
     <p>src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)
-What functionality does your code sample abstract away?
-getBlockStatus() abstracts away all the logic for determining whether a major requirement block has been satisfied. Callers never need to know what rule type a block is (must_take, choose_one, choose_n, choose_credits, or special cases like ANTH_FOUR_FIELDS). They simply pass in a block object and receive back a uniform { completed, completedCourses, completedCredits, detail } result.
+function getBlockStatus(block) { const completedCourses = block.courseCodes.filter((c) =&gt; plannedCourses.has(normalizeCourse(c)), ); const completedCredits = completedCourses.reduce( (t, code) =&gt; t &#43; (courseMap[normalizeCourse(code)]?.credits || 0), 0, ); if (block.code === &#34;ANTH_FOUR_FIELDS&#34;) { const usedSubfields = new Set(); const usedCourses = []; for (const code of plannedCourses) { const course = courseMap[code]; if (!course || !code.startsWith(&#34;ANT&#34;) || getCourseNumber(code) &lt; 200) continue; for (const sf of course.subfields || []) usedSubfields.add(sf); if (course.subfields?.length) usedCourses.push(code); } return { completed: usedSubfields.size &gt;= 3, completedCourses: usedCourses, completedCredits: usedCourses.length * 4, detail: `${usedSubfields.size} / 3 subfields` }; } if (block.code === &#34;ANTH_ADV_PATH_B&#34;) { const hasThesis = plannedCourses.has(&#34;ANT499&#34;); const adv = Array.from(plannedCourses).filter((c) =&gt; c.startsWith(&#34;ANT&#34;) &amp;&amp; getCourseNumber(c) &gt;= 300); return { completed: hasThesis &amp;&amp; adv.length &gt;= 1, completedCourses: [...adv, ...(hasThesis ? [&#34;ANT499&#34;] : [])], completedCredits: adv.length * 4 &#43; (hasThesis ? 4 : 0) }; } if (block.code === &#34;CSC_ELECTIVE&#34;) { const requiredCodes = getUsedRequiredCourses(); const usedElectives = []; let credits = 0; for (const code of plannedCourses) { const course = courseMap[code]; if (!course || !code.startsWith(&#34;CSC&#34;)) continue; if (requiredCodes.has(code) || [&#34;CSC281&#34;, &#34;CSC282&#34;].includes(code) || getCourseNumber(code) &lt; 200) continue; credits &#43;= code === &#34;CSC326&#34; ? Math.min(course.credits || 0, 2) : course.credits || 0; usedElectives.push(code); } const sys = [&#34;CSC211&#34;, &#34;CSC213&#34;].filter((c) =&gt; plannedCourses.has(c)); if (sys.length === 2) { const extra = sys.find((c) =&gt; !usedElectives.includes(c)); if (extra) { credits &#43;= courseMap[extra]?.credits || 0; usedElectives.push(extra); } } return { completed: credits &gt;= (block.minCredits || 4), completedCourses: usedElectives, completedCredits: credits, detail: `${credits} / ${block.minCredits || 4} cr` }; } if (block.code === &#34;CSC_MATH_ELECTIVE&#34;) { const used = Array.from(plannedCourses).filter( (c) =&gt; (c.startsWith(&#34;MAT&#34;) &amp;&amp; getCourseNumber(c) &gt; 131) || c.startsWith(&#34;STA&#34;), ); return { completed: used.length &gt;= 1, completedCourses: used, completedCredits: used.reduce((t, c) =&gt; t &#43; (courseMap[c]?.credits || 0), 0) }; } if (block.code === &#34;CSC_TOTALS_AND_POLICIES&#34;) { const used = Array.from(plannedCourses).filter( (c) =&gt; (c.startsWith(&#34;CSC&#34;) &amp;&amp; getCourseNumber(c) &gt;= 151) || [&#34;MAT208&#34;, &#34;MAT218&#34;].includes(c), ); const credits = used.reduce((t, c) =&gt; t &#43; (courseMap[c]?.credits || 0), 0); return { completed: credits &gt;= (block.minCredits || 32), completedCourses: used, completedCredits: credits, detail: `${credits} / ${block.minCredits || 32} cr` }; } if (block.ruleType === &#34;must_take&#34;) return { completed: block.courseCodes.length &gt; 0 &amp;&amp; completedCourses.length === block.courseCodes.length, completedCourses, completedCredits }; if (block.ruleType === &#34;choose_one&#34;) return { completed: completedCourses.length &gt;= 1, completedCourses, completedCredits }; if (block.ruleType === &#34;choose_n&#34;) return { completed: completedCourses.length &gt;= (block.minCount || 1), completedCourses, completedCredits }; if (block.ruleType === &#34;choose_credits&#34;) return { completed: completedCredits &gt;= (block.minCredits || 0), completedCourses, completedCredits }; return { completed: false, completedCourses, completedCredits }; } What functionality does your code sample abstract away?
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
@@ -178,8 +185,7 @@ getBlockStatus() abstracts away all the logic for determining whether a major re
   <div class="entry-content">
     <p>Medium-Scale Architecture
 src/App.jsx (lines 34–82), server/index.js, src/components/semestersTable.jsx, src/components/major_requirements.jsx
-What architectural pattern does your program employ?
-The project uses a REST API &#43; Single Page Application (SPA) pattern. The backend exposes a stateless JSON API over HTTP; the frontend is a React SPA that fetches from those endpoints and manages all interactive state locally. This is a client-server separation where neither side knows about the other’s internal structure — the server just returns JSON, and the client just consumes it.
+const [orGroupSelections, setOrGroupSelections] = useState({}); useEffect(() =&gt; { async function loadPlannerData() { try { const [coursesResponse, majorsResponse] = await Promise.all([ fetch(&#34;/api/courses&#34;), fetch(&#34;/api/majors&#34;), ]); if (!coursesResponse.ok || !majorsResponse.ok) { throw new Error(&#34;Could not load planner data from SQL.&#34;); } const [courses, majorsList] = await Promise.all([ coursesResponse.json(), majorsResponse.json(), ]); setCoursesData(courses); setMajors(majorsList.majors); } catch (error) { setLoadError(error.message); } } loadPlannerData(); }, []); useEffect(() =&gt; { async function loadMajorRequirements() { try { setLoadError(&#34;&#34;); setMajorRequirements(null); const requirementsResponse = await fetch( `/api/majors/${selectedMajorCode}/requirements`, ); if (!requirementsResponse.ok) { throw new Error(&#34;Could not load major requirements from SQL.&#34;); } setMajorRequirements(await requirementsResponse.json()); } catch (error) { setLoadError(error.message); } } loadMajorRequirements(); }, [selectedMajorCode]); What architectural pattern does your program employ?
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
@@ -198,8 +204,7 @@ The project uses a REST API &#43; Single Page Application (SPA) pattern. The bac
     </h2>
   </header>
   <div class="entry-content">
-    <p>What techniques did you employ to discover users’ needs?
-The team conducted informal interviews with Grinnell students — specifically students who had recently gone through the process of planning their four-year course schedule. Conversations focused on pain points with the existing tools (the registrar’s worksheet and the catalog PDF), how students currently track prerequisites, and where they felt uncertain about whether they were on track for their major. We also observed how students currently lay out their plans using spreadsheets or handwritten grids.
+    <p>Answers (Mihail (Misho) Palmov): 1. 3rd year 2. Physics and Chemistry 3. Before starting school at Grinnell I had no information on course planning and did not know how I would structure my degree. 4. I looked at the major requirements, when I was declaring my majors, and did my best to fit all the classes I needed in a way that would not make my schedule too hectic. 5. I used the major declaration form and separate sheets of paper to write different versions of my 4-year plan. 6. Before talking to my advisors, my 4-year plan was very tentative and was only based on the few classes I knew I had to take. In my initial 4-year plan, I did not think about courses, outside of my majors very much. 7. Not knowing if I will be able to get into certain classes, that I either need for my major or want to take. As an example, in my four-year plan I was going to take two STEM and two humanities classes this semester, however I was cut from both of my humanities and could only find one other non-STEM course that matched my schedule. The fact that my four-year plan is subject to change every semester and has to be flexible to accommodate that is very frustrating. 8. No, typically prerequisites are well explained, and so are major requirements. I have, however, had trouble with repeatedly having to get prerequisites waived, as I came in with outside credit. While this didn&#39;t affect my four-year plan it makes course registration slightly more stressful. 9. I have had to change my four-year plan every semester since I first made it. 10. I have changed my four-year plan once because the classes I was taking make the workload too much (planning error on my part), and because I did not get into some of my classes another time. 11. It is fairly easy to tell that I&#39;m on track both thanks to my advisors, who are always clear on my progress, and thanks to Colleague Self-Service, which nicely presents my progress . 12. I go back to my academic transcript or Colleague Self-Service and compare it with the major requirements. 13. Having a good, flexible plan for my four years is very calming and generally helpful. The problem for me is that this plan is more-so a theoretical proof-of-concept that I can complete my major, rather than a plan that is set in stone. 14. Typically no, I try to plan things early on so that I know they are feasible and I don&#39;t have to figure them out last minute. 16. I think it would be helpful to stress more on your four year plan early on in your First Year, as it gives a good template to follow in our next three years. 17. Knowing when exactly classes are taking place and what the class sizes are earlier on, so that I know when there are overlaps in my four-year plan and how likely I am to actually get the classes I am planning to take What techniques did you employ to discover users’ needs?
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
@@ -209,10 +214,18 @@ The team conducted informal interviews with Grinnell students — specifically s
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Testing Infrastructure
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>How have you automated your tests so that they both take one click to run and run automatically as part of build validation?
+The testing infrastructure is built on Vitest, which plugs directly into the existing Vite build setup through vite.config.js. A test block was added to that file specifying jsdom as the rendering environment and pointing to a setup file at src/test/setup.js that imports @testing-library/jest-dom to enable matchers like toBeInTheDocument. Two scripts were added to package.json: npm run test starts Vitest in watch mode, where it automatically re-runs all affected tests every time a file is saved, giving immediate feedback during development without any manual action. npm run coverage runs the full suite once and prints a coverage table broken down by statements, branches, functions, and lines for every file in the components folder. Because Vitest shares its configuration with Vite, there is no duplication between the build config and the test config and both tools stay in sync automatically.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Testing Infrastructure" href="http://localhost:1313/my-portfolio/posts/testing-infrastructure/"></a>
@@ -221,10 +234,19 @@ The team conducted informal interviews with Grinnell students — specifically s
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Testing Strategies
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>Sample: src/components/major_requirements.test.jsx
+According to code coverage tools, what aspects of this component are covered with tests?
+The component I was responsible for testing is MajorRequirements. Running npm run coverage produced the following results for major_requirements.jsx: 54% of statements, 56% of branches, and 60% of functions are covered. The tests cover the following aspects of the component: the initial unchecked state where all indicators are neutral and the hint message is visible, the evaluation of must_take blocks where the required course must be present in the plan, choose_one blocks where any single option satisfies the requirement, choose_n blocks where a minimum number of courses must be planned, and the special ANTH_FOUR_FIELDS block that checks breadth across academic subfields rather than a simple course count. The collapsible tree interaction is also covered, verifying that clicking a block row hides and reveals its course list independently of other blocks, and that course names and notes render correctly.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Testing Strategies" href="http://localhost:1313/my-portfolio/posts/testing-strategies/"></a>

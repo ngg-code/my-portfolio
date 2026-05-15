@@ -8,8 +8,74 @@
 <title>Abstraction | My Portfolio</title>
 <meta name="keywords" content="">
 <meta name="description" content="src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)
-What functionality does your code sample abstract away?
-getBlockStatus() abstracts away all the logic for determining whether a major requirement block has been satisfied. Callers never need to know what rule type a block is (must_take, choose_one, choose_n, choose_credits, or special cases like ANTH_FOUR_FIELDS). They simply pass in a block object and receive back a uniform { completed, completedCourses, completedCredits, detail } result.">
+  function getBlockStatus(block) {
+    const completedCourses = block.courseCodes.filter((c) =&gt;
+      plannedCourses.has(normalizeCourse(c)),
+    );
+    const completedCredits = completedCourses.reduce(
+      (t, code) =&gt; t &#43; (courseMap[normalizeCourse(code)]?.credits || 0),
+      0,
+    );
+
+    if (block.code === &#34;ANTH_FOUR_FIELDS&#34;) {
+      const usedSubfields = new Set();
+      const usedCourses = [];
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&#34;ANT&#34;) || getCourseNumber(code) &lt; 200) continue;
+        for (const sf of course.subfields || []) usedSubfields.add(sf);
+        if (course.subfields?.length) usedCourses.push(code);
+      }
+      return { completed: usedSubfields.size &gt;= 3, completedCourses: usedCourses, completedCredits: usedCourses.length * 4, detail: `${usedSubfields.size} / 3 subfields` };
+    }
+
+    if (block.code === &#34;ANTH_ADV_PATH_B&#34;) {
+      const hasThesis = plannedCourses.has(&#34;ANT499&#34;);
+      const adv = Array.from(plannedCourses).filter((c) =&gt; c.startsWith(&#34;ANT&#34;) &amp;&amp; getCourseNumber(c) &gt;= 300);
+      return { completed: hasThesis &amp;&amp; adv.length &gt;= 1, completedCourses: [...adv, ...(hasThesis ? [&#34;ANT499&#34;] : [])], completedCredits: adv.length * 4 &#43; (hasThesis ? 4 : 0) };
+    }
+
+    if (block.code === &#34;CSC_ELECTIVE&#34;) {
+      const requiredCodes = getUsedRequiredCourses();
+      const usedElectives = [];
+      let credits = 0;
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&#34;CSC&#34;)) continue;
+        if (requiredCodes.has(code) || [&#34;CSC281&#34;, &#34;CSC282&#34;].includes(code) || getCourseNumber(code) &lt; 200) continue;
+        credits &#43;= code === &#34;CSC326&#34; ? Math.min(course.credits || 0, 2) : course.credits || 0;
+        usedElectives.push(code);
+      }
+      const sys = [&#34;CSC211&#34;, &#34;CSC213&#34;].filter((c) =&gt; plannedCourses.has(c));
+      if (sys.length === 2) {
+        const extra = sys.find((c) =&gt; !usedElectives.includes(c));
+        if (extra) { credits &#43;= courseMap[extra]?.credits || 0; usedElectives.push(extra); }
+      }
+      return { completed: credits &gt;= (block.minCredits || 4), completedCourses: usedElectives, completedCredits: credits, detail: `${credits} / ${block.minCredits || 4} cr` };
+    }
+
+    if (block.code === &#34;CSC_MATH_ELECTIVE&#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&gt; (c.startsWith(&#34;MAT&#34;) &amp;&amp; getCourseNumber(c) &gt; 131) || c.startsWith(&#34;STA&#34;),
+      );
+      return { completed: used.length &gt;= 1, completedCourses: used, completedCredits: used.reduce((t, c) =&gt; t &#43; (courseMap[c]?.credits || 0), 0) };
+    }
+
+    if (block.code === &#34;CSC_TOTALS_AND_POLICIES&#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&gt; (c.startsWith(&#34;CSC&#34;) &amp;&amp; getCourseNumber(c) &gt;= 151) || [&#34;MAT208&#34;, &#34;MAT218&#34;].includes(c),
+      );
+      const credits = used.reduce((t, c) =&gt; t &#43; (courseMap[c]?.credits || 0), 0);
+      return { completed: credits &gt;= (block.minCredits || 32), completedCourses: used, completedCredits: credits, detail: `${credits} / ${block.minCredits || 32} cr` };
+    }
+
+    if (block.ruleType === &#34;must_take&#34;) return { completed: block.courseCodes.length &gt; 0 &amp;&amp; completedCourses.length === block.courseCodes.length, completedCourses, completedCredits };
+    if (block.ruleType === &#34;choose_one&#34;) return { completed: completedCourses.length &gt;= 1, completedCourses, completedCredits };
+    if (block.ruleType === &#34;choose_n&#34;) return { completed: completedCourses.length &gt;= (block.minCount || 1), completedCourses, completedCredits };
+    if (block.ruleType === &#34;choose_credits&#34;) return { completed: completedCredits &gt;= (block.minCredits || 0), completedCourses, completedCredits };
+    return { completed: false, completedCourses, completedCredits };
+  }
+What functionality does your code sample abstract away?">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/my-portfolio/posts/abstraction/">
 <link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
@@ -124,12 +190,81 @@ getBlockStatus() abstracts away all the logic for determining whether a major re
 </div>
   </header> 
   <div class="post-content md-content"><p>src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)</p>
-<p>What functionality does your code sample abstract away?</p>
+<pre tabindex="0"><code>  function getBlockStatus(block) {
+    const completedCourses = block.courseCodes.filter((c) =&gt;
+      plannedCourses.has(normalizeCourse(c)),
+    );
+    const completedCredits = completedCourses.reduce(
+      (t, code) =&gt; t + (courseMap[normalizeCourse(code)]?.credits || 0),
+      0,
+    );
+
+    if (block.code === &#34;ANTH_FOUR_FIELDS&#34;) {
+      const usedSubfields = new Set();
+      const usedCourses = [];
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&#34;ANT&#34;) || getCourseNumber(code) &lt; 200) continue;
+        for (const sf of course.subfields || []) usedSubfields.add(sf);
+        if (course.subfields?.length) usedCourses.push(code);
+      }
+      return { completed: usedSubfields.size &gt;= 3, completedCourses: usedCourses, completedCredits: usedCourses.length * 4, detail: `${usedSubfields.size} / 3 subfields` };
+    }
+
+    if (block.code === &#34;ANTH_ADV_PATH_B&#34;) {
+      const hasThesis = plannedCourses.has(&#34;ANT499&#34;);
+      const adv = Array.from(plannedCourses).filter((c) =&gt; c.startsWith(&#34;ANT&#34;) &amp;&amp; getCourseNumber(c) &gt;= 300);
+      return { completed: hasThesis &amp;&amp; adv.length &gt;= 1, completedCourses: [...adv, ...(hasThesis ? [&#34;ANT499&#34;] : [])], completedCredits: adv.length * 4 + (hasThesis ? 4 : 0) };
+    }
+
+    if (block.code === &#34;CSC_ELECTIVE&#34;) {
+      const requiredCodes = getUsedRequiredCourses();
+      const usedElectives = [];
+      let credits = 0;
+      for (const code of plannedCourses) {
+        const course = courseMap[code];
+        if (!course || !code.startsWith(&#34;CSC&#34;)) continue;
+        if (requiredCodes.has(code) || [&#34;CSC281&#34;, &#34;CSC282&#34;].includes(code) || getCourseNumber(code) &lt; 200) continue;
+        credits += code === &#34;CSC326&#34; ? Math.min(course.credits || 0, 2) : course.credits || 0;
+        usedElectives.push(code);
+      }
+      const sys = [&#34;CSC211&#34;, &#34;CSC213&#34;].filter((c) =&gt; plannedCourses.has(c));
+      if (sys.length === 2) {
+        const extra = sys.find((c) =&gt; !usedElectives.includes(c));
+        if (extra) { credits += courseMap[extra]?.credits || 0; usedElectives.push(extra); }
+      }
+      return { completed: credits &gt;= (block.minCredits || 4), completedCourses: usedElectives, completedCredits: credits, detail: `${credits} / ${block.minCredits || 4} cr` };
+    }
+
+    if (block.code === &#34;CSC_MATH_ELECTIVE&#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&gt; (c.startsWith(&#34;MAT&#34;) &amp;&amp; getCourseNumber(c) &gt; 131) || c.startsWith(&#34;STA&#34;),
+      );
+      return { completed: used.length &gt;= 1, completedCourses: used, completedCredits: used.reduce((t, c) =&gt; t + (courseMap[c]?.credits || 0), 0) };
+    }
+
+    if (block.code === &#34;CSC_TOTALS_AND_POLICIES&#34;) {
+      const used = Array.from(plannedCourses).filter(
+        (c) =&gt; (c.startsWith(&#34;CSC&#34;) &amp;&amp; getCourseNumber(c) &gt;= 151) || [&#34;MAT208&#34;, &#34;MAT218&#34;].includes(c),
+      );
+      const credits = used.reduce((t, c) =&gt; t + (courseMap[c]?.credits || 0), 0);
+      return { completed: credits &gt;= (block.minCredits || 32), completedCourses: used, completedCredits: credits, detail: `${credits} / ${block.minCredits || 32} cr` };
+    }
+
+    if (block.ruleType === &#34;must_take&#34;) return { completed: block.courseCodes.length &gt; 0 &amp;&amp; completedCourses.length === block.courseCodes.length, completedCourses, completedCredits };
+    if (block.ruleType === &#34;choose_one&#34;) return { completed: completedCourses.length &gt;= 1, completedCourses, completedCredits };
+    if (block.ruleType === &#34;choose_n&#34;) return { completed: completedCourses.length &gt;= (block.minCount || 1), completedCourses, completedCredits };
+    if (block.ruleType === &#34;choose_credits&#34;) return { completed: completedCredits &gt;= (block.minCredits || 0), completedCourses, completedCredits };
+    return { completed: false, completedCourses, completedCredits };
+  }
+</code></pre><p>What functionality does your code sample abstract away?</p>
 <p>getBlockStatus() abstracts away all the logic for determining whether a major requirement block has been satisfied. Callers never need to know what rule type a block is (must_take, choose_one, choose_n, choose_credits, or special cases like ANTH_FOUR_FIELDS). They simply pass in a block object and receive back a uniform { completed, completedCourses, completedCredits, detail } result.</p>
 <p>How does it mechanically achieve abstraction?</p>
-<p>The function is a single entry point that branches internally by block.code and block.ruleType. For the ANTH_FOUR_FIELDS case (lines 66–76), it iterates over planned courses, collects unique subfield tags from the course data, and returns completion when at least three subfields are covered — a calculation completely unlike the standard course-count checks for must_take or choose_n. All branches return the same shaped object, so the output is predictable regardless of what path was taken internally. The rendering layer at lines 213–354 consumes only status.completed and status.detail and never inspects ruleType or course arrays directly.</p>
+<p>The function acts as a single entry point that handles all the different types of requirement blocks internally. Depending on what kind of block it receives, it takes a completely different path to figure out whether that block is complete, but no matter which path it takes, it always hands back the same type of answer: a simple object that says whether the block is done, which courses counted toward it, how many credits those courses add up to, and a short human readable detail string.</p>
+<p>For example, when the function encounters the Anthropology four fields block, it cannot simply count how many courses from a list the student has taken. Instead, it has to look at every Anthropology course the student planned, check what academic subfields each of those courses belongs to (things like cultural anthropology, archaeology, or biological anthropology), collect all the unique subfields it finds, and then decide the block is complete only if the student has covered at least three distinct subfields. That is a fundamentally different kind of check because it is about breadth across categories, not just quantity. Meanwhile, a standard must take block just checks whether specific required course codes appear in the student&rsquo;s plan, and a choose N block checks whether enough courses from an approved list are planned. Each of these needs its own logic.</p>
+<p>The key design decision is that all of this complexity is buried inside the function and never leaks out. The part of the code responsible for drawing the requirement tree on screen never has to ask whether a block is a four fields block or a choose N block. It just asks the function whether the block is done and gets back a clean, consistent answer it can work with. This means the visual display code stays simple and readable, and all the complicated business rules about what counts as done for each block type live in one place where they can be understood and changed without touching the display at all.</p>
 <p>What purpose does this abstraction serve in your larger program?</p>
-<p>The abstraction enforces a clean boundary between evaluation logic and display logic. Adding a new rule type only requires adding a branch inside getBlockStatus — the tree-rendering JSX and the progress bar percentage calculation at lines 148–150 require no changes. It also makes the MajorRequirements component easy to reuse across different majors: swapping from CSC to Anthropology to Economics only changes the data passed in, not the evaluation code.</p>
+<p>The abstraction enforces a clean boundary between evaluation logic and display logic. Adding a new rule type only requires adding a branch inside the status checking function, and none of the visual components that render the tree or calculate the progress bar percentage need to change at all. It also makes the requirements component easy to reuse across different majors. Swapping from Computer Science to Anthropology to Economics only changes the data being passed into the component, not any of the evaluation code itself.</p>
 
 
   </div>

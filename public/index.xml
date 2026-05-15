@@ -14,12 +14,12 @@
       <pubDate>Mon, 11 May 2026 14:59:15 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/quality/</guid>
       <description>&lt;p&gt;Where the codebase exemplifies engineering excellence:&lt;/p&gt;
-&lt;p&gt;Single source of truth for course validation. canPlaceCourse (src/App.jsx:233–308) is called by both the manual selection path and the auto-fill algorithm. There is no duplicate prerequisite-checking code anywhere.
+&lt;p&gt;Single source of truth for course validation.&lt;/p&gt;
+&lt;p&gt;canPlaceCourse (src/App.jsx:233–308) is called by both the manual selection path and the auto-fill algorithm. There is no duplicate prerequisite-checking code anywhere.
 Normalized data access. normalizeCourse is defined once and used consistently everywhere course codes are compared — it handles the CSC-151 vs CSC151 vs csc 151 variations that arise from different data sources. Without it, course lookups would silently fail on format mismatches.
 Parameterized SQL throughout. Every query in server/index.js uses $1/$2 placeholders, eliminating SQL injection as a vulnerability class.
 Component boundaries are clean. SemestersTable and MajorRequirements are fully controlled components: they own no authoritative state, accept data via props, and communicate upward through callbacks. This makes their behavior completely predictable from the outside.
-The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–189) solves the topological ordering problem with a simple scoring function rather than a full graph traversal — adequate for the domain size and much easier to reason about.
-Where it falls short and how you would address it:&lt;/p&gt;</description>
+The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–189) solves the topological ordering problem with a simple function rather than a full graph traversal — adequate for the domain size and much easier to reason about.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Accessible Design</title>
@@ -33,9 +33,11 @@ Where it falls short and how you would address it:&lt;/p&gt;</description>
       <link>http://localhost:1313/my-portfolio/posts/ui-design/</link>
       <pubDate>Mon, 11 May 2026 14:54:22 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/ui-design/</guid>
-      <description>&lt;p&gt;Sample: src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)&lt;/p&gt;
-&lt;p&gt;Visibility of system status (Nielsen&amp;rsquo;s heuristic #1): Status dots change from gray → green/red only after &amp;ldquo;Check Requirements&amp;rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&amp;rsquo;t evaluated. The progress bar animates to the correct percentage (line 191: transition: &amp;ldquo;width 0.4s ease&amp;rdquo;), reinforcing that a state change just occurred.&lt;/p&gt;
-&lt;p&gt;Direct manipulation: Clicking a semester slot transforms it in-place into a &lt;!-- raw HTML omitted --&gt; dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.&lt;/p&gt;</description>
+      <description>&lt;p&gt;src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)&lt;/p&gt;
+&lt;p&gt;Visibility of system status :&lt;/p&gt;
+&lt;p&gt;Status dots change from gray → green/red only after &amp;ldquo;Check Requirements&amp;rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&amp;rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: &amp;ldquo;width 0.4s ease&amp;rdquo;), showing that a state change just occurred.&lt;/p&gt;
+&lt;p&gt;Direct manipulation:&lt;/p&gt;
+&lt;p&gt;Clicking a semester slot transforms it in-place into a &lt;!-- raw HTML omitted --&gt; dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Testing Technologies</title>
@@ -49,8 +51,9 @@ Where it falls short and how you would address it:&lt;/p&gt;</description>
       <link>http://localhost:1313/my-portfolio/posts/domain-specific-architecture/</link>
       <pubDate>Mon, 11 May 2026 14:52:52 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/domain-specific-architecture/</guid>
-      <description>&lt;p&gt;What aspects of your software architecture arise because of the domain?
-The entire course placement layer exists solely because of the domain: academic scheduling has prerequisites (a directed dependency graph), term offerings (courses only exist in Fall or Spring), department enrollment caps (no more than 2 CSC courses/semester in years 1–2), and standing requirements. None of these constraints map onto generic CRUD patterns. The architecture adds a dedicated constraint validation layer (canPlaceCourse, lines 233–308) that sits between any user or algorithm action and the state mutation. Every course placement — manual or automated — passes through this layer before anything changes.&lt;/p&gt;</description>
+      <description>&lt;p&gt;src/App.jsx lines 160–308 (getPreferredSemesterIndex, getSequenceScore, canPlaceCourse)&lt;/p&gt;
+&lt;p&gt;What aspects of your software architecture arise because of the domain?&lt;/p&gt;
+&lt;p&gt;The entire course placement layer exists solely because of the domain: academic scheduling has prerequisites (a directed dependency graph), term offerings (courses only exist in Fall or Spring), department enrollment caps (no more than 2 CSC courses/semester in years 1–2), and standing requirements. None of these constraints map onto generic CRUD patterns. The architecture adds a dedicated constraint validation layer (canPlaceCourse, lines 233–308) that sits between any user or algorithm action and the state mutation. Every course placement — manual or automated — passes through this layer before anything changes.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Security</title>
@@ -64,57 +67,124 @@ The entire course placement layer exists solely because of the domain: academic 
       <link>http://localhost:1313/my-portfolio/posts/collaboration/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/collaboration/</guid>
-      <description>&lt;p&gt;Instance 1 — Code review of a pull request (PR #3: feature/requirement-logic-R)
-Linda Jing opened PR #3 to add the requirement logic to the SQL files and connect it to App.jsx. The review identified that the prerequisite logic needed adjustment to handle the case where a course appears in both a must_take block and an elective block — without deduplication, the same course could satisfy two independent requirements simultaneously. The review comment resulted in the commit 2238a86 - revised pre req logic based on the code review where Linda updated the logic. The difficulty in this review was understanding the data model well enough to catch a subtle double-counting issue that would not be apparent from reading the SQL alone; it required mentally simulating the evaluation path.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Instance 1 — Code review of a pull request&lt;/p&gt;
+&lt;p&gt;Linda Jing opened Pull request to add the requirement logic to the SQL files and connect it to App.jsx. The review identified that the prerequisite logic needed adjustment to handle the case where a course appears in both a must_take block and an elective block — without duplication, the same course could satisfy two independent requirements simultaneously. The review comment resulted in the commit 2238a86 - revised pre req logic based on the code review where Linda updated the logic.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Evaluation</title>
       <link>http://localhost:1313/my-portfolio/posts/evaluation/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/evaluation/</guid>
-      <description>&lt;p&gt;What was the design of your user study to evaluate your artifact?
-After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: &amp;ldquo;Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.&amp;rdquo; We observed without prompting and noted how long tasks took, where users got stuck, and what they clicked first. Afterward we asked a short debrief about what was confusing and what they would change.&lt;/p&gt;</description>
+      <description>&lt;p&gt;What was the design of your user study to evaluate your artifact?&lt;/p&gt;
+&lt;p&gt;After building the working application, we ran a structured usability test with three Grinnell students who had not seen the tool before. Each participant was given the same task: &amp;ldquo;Plan a four-year schedule for a CS major, starting from scratch, and verify that your plan satisfies major requirements.&amp;rdquo; Afterward we asked a short questions about what was confusing and what they would change.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Infrastructure</title>
       <link>http://localhost:1313/my-portfolio/posts/infrastructure/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/infrastructure/</guid>
-      <description>&lt;p&gt;What development tools did you use through the process to help write code and automate the build/deployment process?
-The primary development tools were: Vite as the build tool and dev server (with hot module replacement making UI changes instantly visible without a full reload); ESLint 9 with eslint-plugin-react-hooks and eslint-plugin-react-refresh for static analysis; Node.js + Express for the local API server; PostgreSQL for the database with SQL seed scripts loaded via psql; and Git + GitHub for version control and PR-based code review. npm run server and npm run dev are the two commands that together bring the full stack up locally.&lt;/p&gt;</description>
+      <description>&lt;p&gt;What development tools did you use through the process to help write code and automate the build/deployment process?&lt;/p&gt;
+&lt;p&gt;The primary development tools were: Vite as the build tool and dev server (with hot module replacement making UI changes instantly visible without a full reload). Node.js + Express for the local API server, PostgreSQL for the database with SQL seed scripts loaded via psql, and Git + GitHub for version control and PR-based code review. npm run server and npm run dev are the two commands that together bring the full stack up locally.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Process</title>
       <link>http://localhost:1313/my-portfolio/posts/process/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/process/</guid>
-      <description>&lt;p&gt;What software engineering practices did your group employ to manage, distribute, and execute on their work?
-The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests (PR #1: linkingSqlBranch, PR #3: feature/requirement-logic-R), and merges required at least a cursory review before being merged into main. Work was distributed by component ownership — one teammate (Linda Jing) was primarily responsible for SQL schema and backend requirement data, one (Drilon Qerimi) focused on the MVP planner logic, and this author (Nahom) was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.&lt;/p&gt;</description>
+      <description>&lt;p&gt;What software engineering practices did your group employ to manage, distribute, and execute on their work?&lt;/p&gt;
+&lt;p&gt;The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests, and merges required a review before being merged into main. Work was distributed by component ownership — Linda Jing was primarily responsible for SQL schema, Drilon Qerimi focused on the backend, and I was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Prototyping</title>
       <link>http://localhost:1313/my-portfolio/posts/prototyping/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/prototyping/</guid>
-      <description>&lt;p&gt;What design questions did you intend to answer with your prototypes?
-Our prototypes aimed to answer two questions: (1) Is the semester grid layout intuitive as a way to enter and visualize a four-year plan? (2) Does showing requirement completion status before vs. after a user action (live vs. on-demand) help or distract students from planning?&lt;/p&gt;
-&lt;p&gt;How did you design your prototypes and subsequent user studies to address these questions?
-We built a low-fidelity paper prototype of the 4×2 semester grid (four columns for two semesters per academic year, two rows for upper and lower half of the page) and tested it with three students. For the live-vs-on-demand question we built two versions of the requirements panel — one that updated after every course added and one that only updated when the user clicked &amp;ldquo;Check Requirements&amp;rdquo; — and alternated which version each test user saw first. We asked users to think aloud while filling in a sample plan and observed where they paused, re-read, or expressed confusion.&lt;/p&gt;</description>
+      <description>&lt;p&gt;What design questions did you intend to answer with your prototypes?&lt;/p&gt;
+&lt;p&gt;Our prototypes aimed to answer two questions: (1) Is the semester grid layout intuitive as a way to enter and visualize a four-year plan? (2) Does showing requirement completion status before vs. after a user action help or distract students from planning?&lt;/p&gt;
+&lt;p&gt;How did you design your prototypes and subsequent user studies to address these questions?&lt;/p&gt;
+&lt;p&gt;We built a paper prototype of the 4×2 semester grid (four columns for two semesters per academic year, two rows for upper and lower half of the page) and tested it with three students. For the live-vs-on-demand question we built two versions of the requirements panel — one that updated after every course added and one that only updated when the user clicked &amp;ldquo;Check Requirements&amp;rdquo; — and alternated which version each test user saw first. We asked users to think aloud while filling in a sample plan and observed where they paused, re-read, or expressed confusion.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Self Learning</title>
       <link>http://localhost:1313/my-portfolio/posts/self-learning/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:37 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/self-learning/</guid>
-      <description>&lt;p&gt;Describe the technology that the tutorial addresses and how it fits into your project.
-The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production bundle (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across hot updates.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Describe the technology that the tutorial addresses and how it fits into your project.&lt;/p&gt;
+&lt;p&gt;The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production bundle (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across hot updates.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Abstraction</title>
       <link>http://localhost:1313/my-portfolio/posts/abstraction/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/abstraction/</guid>
-      <description>&lt;p&gt;The MajorRequirements component abstracts away all the complexity of evaluating whether a student&amp;rsquo;s planned courses satisfy a given requirement block. The function getBlockStatus() takes a block object and returns a unified { completed, completedCourses, completedCredits, detail } shape regardless of whether the block is a must_take, choose_one, choose_n, or choose_credits rule — and it also handles special-case logic for Anthropology&amp;rsquo;s four-fields requirement and advanced path B. Callers of this function don&amp;rsquo;t need to know anything about rule types; they just ask &amp;ldquo;is this block done?&amp;rdquo; and get back a consistent answer.&lt;/p&gt;</description>
+      <description>&lt;p&gt;src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)&lt;/p&gt;
+&lt;p&gt;function getBlockStatus(block) {
+const completedCourses = block.courseCodes.filter((c) =&amp;gt;
+plannedCourses.has(normalizeCourse(c)),
+);
+const completedCredits = completedCourses.reduce(
+(t, code) =&amp;gt; t + (courseMap[normalizeCourse(code)]?.credits || 0),
+0,
+);&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;if (block.code === &amp;quot;ANTH_FOUR_FIELDS&amp;quot;) {
+  const usedSubfields = new Set();
+  const usedCourses = [];
+  for (const code of plannedCourses) {
+    const course = courseMap[code];
+    if (!course || !code.startsWith(&amp;quot;ANT&amp;quot;) || getCourseNumber(code) &amp;lt; 200) continue;
+    for (const sf of course.subfields || []) usedSubfields.add(sf);
+    if (course.subfields?.length) usedCourses.push(code);
+  }
+  return { completed: usedSubfields.size &amp;gt;= 3, completedCourses: usedCourses, completedCredits: usedCourses.length * 4, detail: `${usedSubfields.size} / 3 subfields` };
+}
+
+if (block.code === &amp;quot;ANTH_ADV_PATH_B&amp;quot;) {
+  const hasThesis = plannedCourses.has(&amp;quot;ANT499&amp;quot;);
+  const adv = Array.from(plannedCourses).filter((c) =&amp;gt; c.startsWith(&amp;quot;ANT&amp;quot;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 300);
+  return { completed: hasThesis &amp;amp;&amp;amp; adv.length &amp;gt;= 1, completedCourses: [...adv, ...(hasThesis ? [&amp;quot;ANT499&amp;quot;] : [])], completedCredits: adv.length * 4 + (hasThesis ? 4 : 0) };
+}
+
+if (block.code === &amp;quot;CSC_ELECTIVE&amp;quot;) {
+  const requiredCodes = getUsedRequiredCourses();
+  const usedElectives = [];
+  let credits = 0;
+  for (const code of plannedCourses) {
+    const course = courseMap[code];
+    if (!course || !code.startsWith(&amp;quot;CSC&amp;quot;)) continue;
+    if (requiredCodes.has(code) || [&amp;quot;CSC281&amp;quot;, &amp;quot;CSC282&amp;quot;].includes(code) || getCourseNumber(code) &amp;lt; 200) continue;
+    credits += code === &amp;quot;CSC326&amp;quot; ? Math.min(course.credits || 0, 2) : course.credits || 0;
+    usedElectives.push(code);
+  }
+  const sys = [&amp;quot;CSC211&amp;quot;, &amp;quot;CSC213&amp;quot;].filter((c) =&amp;gt; plannedCourses.has(c));
+  if (sys.length === 2) {
+    const extra = sys.find((c) =&amp;gt; !usedElectives.includes(c));
+    if (extra) { credits += courseMap[extra]?.credits || 0; usedElectives.push(extra); }
+  }
+  return { completed: credits &amp;gt;= (block.minCredits || 4), completedCourses: usedElectives, completedCredits: credits, detail: `${credits} / ${block.minCredits || 4} cr` };
+}
+
+if (block.code === &amp;quot;CSC_MATH_ELECTIVE&amp;quot;) {
+  const used = Array.from(plannedCourses).filter(
+    (c) =&amp;gt; (c.startsWith(&amp;quot;MAT&amp;quot;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt; 131) || c.startsWith(&amp;quot;STA&amp;quot;),
+  );
+  return { completed: used.length &amp;gt;= 1, completedCourses: used, completedCredits: used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0) };
+}
+
+if (block.code === &amp;quot;CSC_TOTALS_AND_POLICIES&amp;quot;) {
+  const used = Array.from(plannedCourses).filter(
+    (c) =&amp;gt; (c.startsWith(&amp;quot;CSC&amp;quot;) &amp;amp;&amp;amp; getCourseNumber(c) &amp;gt;= 151) || [&amp;quot;MAT208&amp;quot;, &amp;quot;MAT218&amp;quot;].includes(c),
+  );
+  const credits = used.reduce((t, c) =&amp;gt; t + (courseMap[c]?.credits || 0), 0);
+  return { completed: credits &amp;gt;= (block.minCredits || 32), completedCourses: used, completedCredits: credits, detail: `${credits} / ${block.minCredits || 32} cr` };
+}
+
+if (block.ruleType === &amp;quot;must_take&amp;quot;) return { completed: block.courseCodes.length &amp;gt; 0 &amp;amp;&amp;amp; completedCourses.length === block.courseCodes.length, completedCourses, completedCredits };
+if (block.ruleType === &amp;quot;choose_one&amp;quot;) return { completed: completedCourses.length &amp;gt;= 1, completedCourses, completedCredits };
+if (block.ruleType === &amp;quot;choose_n&amp;quot;) return { completed: completedCourses.length &amp;gt;= (block.minCount || 1), completedCourses, completedCredits };
+if (block.ruleType === &amp;quot;choose_credits&amp;quot;) return { completed: completedCredits &amp;gt;= (block.minCredits || 0), completedCourses, completedCredits };
+return { completed: false, completedCourses, completedCredits };
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;}&lt;/p&gt;</description>
     </item>
     <item>
       <title>Architecture</title>
@@ -122,36 +192,31 @@ The tech tutorial covered Vite as a modern frontend build tool and development s
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/architecture/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Medium-Scale Architecture&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;What architectural pattern does your program employ?
-The project uses a REST API + Single Page Application (SPA) pattern. The backend exposes a stateless JSON API over HTTP; the frontend is a React SPA that fetches from those endpoints and manages all interactive state locally. This is a client-server separation where neither side knows about the other&amp;rsquo;s internal structure — the server just returns JSON, and the client just consumes it.&lt;/p&gt;</description>
+&lt;p&gt;src/App.jsx (lines 34–82), server/index.js, src/components/semestersTable.jsx, src/components/major_requirements.jsx&lt;/p&gt;
+&lt;p&gt;What architectural pattern does your program employ?&lt;/p&gt;
+&lt;p&gt;The project uses a REST API + Single Page Application (SPA) pattern. The backend exposes a stateless JSON API over HTTP; the frontend is a React SPA that fetches from those endpoints and manages all interactive state locally. This is a client-server separation where neither side knows about the other&amp;rsquo;s internal structure — the server just returns JSON, and the client just consumes it.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Needfinding</title>
       <link>http://localhost:1313/my-portfolio/posts/needfinding/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/needfinding/</guid>
-      <description>&lt;p&gt;What techniques did you employ to discover users&amp;rsquo; needs?
-The team conducted informal interviews with Grinnell students — specifically students who had recently gone through the process of planning their four-year course schedule. Conversations focused on pain points with the existing tools (the registrar&amp;rsquo;s worksheet and the catalog PDF), how students currently track prerequisites, and where they felt uncertain about whether they were on track for their major. We also observed how students currently lay out their plans using spreadsheets or handwritten grids.&lt;/p&gt;</description>
+      <description>&lt;p&gt;What techniques did you employ to discover users&amp;rsquo; needs?&lt;/p&gt;
+&lt;p&gt;The team conducted informal interviews with Grinnell students — specifically students who had recently gone through the process of planning their four-year course schedule. Conversations focused on pain points with the existing tools (the registrar&amp;rsquo;s worksheet and the catalog PDF), how students currently track prerequisites, and where they felt uncertain about whether they were on track for their major. We also observed how students currently lay out their plans using spreadsheets or handwritten grids.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Testing Infrastructure</title>
       <link>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/testing-infrastructure/</guid>
-      <description>&lt;p&gt;How have you automated your tests so that they both take &amp;ldquo;1-click&amp;rdquo; to run and run automatically as part of build validation?
-The project does not have automated tests integrated into the build. npm run lint executes ESLint across all .js and .jsx files in one command and catches unused variables, React Hooks rule violations (via eslint-plugin-react-hooks), and module issues — this is the closest thing to automated build validation in the project. The npm run build command (Vite production build) will also surface import errors and module resolution failures, so it acts as a lightweight integration check. There is no CI pipeline configured (no GitHub Actions, no pre-commit hooks that block on failures).&lt;/p&gt;</description>
+      <description></description>
     </item>
     <item>
       <title>Testing Strategies</title>
       <link>http://localhost:1313/my-portfolio/posts/testing-strategies/</link>
       <pubDate>Wed, 22 Apr 2026 09:25:36 -0500</pubDate>
       <guid>http://localhost:1313/my-portfolio/posts/testing-strategies/</guid>
-      <description>&lt;p&gt;According to code coverage tools, what aspects of this component are covered?
-There is no test coverage. The project has no test files, no testing framework configured (no Jest, Vitest, or similar), and package.json contains no test script. Zero percent of the codebase is covered by automated tests.&lt;/p&gt;
-&lt;p&gt;What kinds of tests are they?
-N/A — no tests of any kind were written.&lt;/p&gt;
-&lt;p&gt;For code that is not covered by tests, why did you not cover them?
-The core business logic — canPlaceCourse (src/App.jsx:233–308), getBlockStatus (src/components/major_requirements.jsx:57–123), and autoFillPlan (src/App.jsx:513–633) — would have been the highest-value targets for unit testing because they contain complex branching logic over prerequisite chains, term offerings, credit counts, and special-case rules. Testing was not prioritized during the sprint because the team validated behavior manually by running the application and checking requirement outputs against known-correct course sequences. This was a pragmatic shortcut given time constraints but a meaningful gap: a bug in canPlaceCourse can silently place illegal courses without any automated catch, and the auto-fill algorithm&amp;rsquo;s correctness relies entirely on manual inspection.&lt;/p&gt;</description>
+      <description></description>
     </item>
   </channel>
 </rss>

@@ -6,7 +6,7 @@ title = 'Self Learning'
 
 Describe the technology that the tutorial addresses and how it fits into your project.
 
-The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production bundle (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across hot updates.
+The tech tutorial covered Vite as a modern frontend build tool and development server, specifically how it differs from tools like Create React App and Webpack. In our project, Vite handles the development server (npm run dev), the production (npm run build), and the API proxy configuration (vite.config.js) that routes /api calls from the browser to the Express server without CORS issues. It also provides React Fast Refresh, which keeps component state alive across new updates.
 
 Evaluate how useful the tool was in your work. What were its strengths and weaknesses?
 

@@ -114,12 +114,17 @@
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Quality
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
     <p>Where the codebase exemplifies engineering excellence:
-Single source of truth for course validation.
-canPlaceCourse (src/App.jsx:233–308) is called by both the manual selection path and the auto-fill algorithm. There is no duplicate prerequisite-checking code anywhere. Normalized data access. normalizeCourse is defined once and used consistently everywhere course codes are compared — it handles the CSC-151 vs CSC151 vs csc 151 variations that arise from different data sources. Without it, course lookups would silently fail on format mismatches. Parameterized SQL throughout. Every query in server/index.js uses $1/$2 placeholders, eliminating SQL injection as a vulnerability class. Component boundaries are clean. SemestersTable and MajorRequirements are fully controlled components: they own no authoritative state, accept data via props, and communicate upward through callbacks. This makes their behavior completely predictable from the outside. The sequencing algorithm avoids over-engineering. getSequenceScore (lines 181–189) solves the topological ordering problem with a simple function rather than a full graph traversal — adequate for the domain size and much easier to reason about.
+Single source of truth for course validation. All course placement logic, including prerequisite checking, term offering restrictions, and enrollment caps, lives in one single function that is called by both the manual course selection path and the automatic fill algorithm. There is no duplicate validation code anywhere in the project, which means that fixing a bug or adding a new rule only ever needs to happen in one place and is guaranteed to apply everywhere the validation is used.
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-05-11 14:59:15 -0500 CDT'>May 11, 2026</span></footer>
@@ -147,14 +152,18 @@ canPlaceCourse (src/App.jsx:233–308) is called by both the manual selection pa
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">UI Design
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
     <p>src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
-Visibility of system status :
-Status dots change from gray → green/red only after “Check Requirements” is clicked, giving explicit feedback about what the system knows vs. what it hasn’t evaluated. The progress bar shows the correct percentage (line 191: transition: “width 0.4s ease”), showing that a state change just occurred.
-Direct manipulation:
-Clicking a semester slot transforms it in-place into a dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.
+Visibility of System Status
+One of the core interaction design principles is that a system should always keep users informed about what is happening and what the system currently knows. The requirements panel was designed with this principle at its center. When a student first loads the application or is in the middle of building their plan, all the status indicators in the requirements panel appear in a neutral gray color. This is intentional. The gray state communicates clearly that the system has not yet evaluated the plan and is not making any claims about whether requirements are met or not. Only after the student explicitly clicks the Check Requirements button do the indicators change, with completed blocks turning green and incomplete ones turning red, and the progress bar animating to reflect the current completion percentage. The animated transition on the progress bar reinforces the fact that a meaningful state change just occurred and draws the eye to the updated information. This two-stage design, where the system stays neutral until explicitly asked to evaluate, prevents students from being misled by partial information while they are still in the middle of editing their plan.
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-05-11 14:54:22 -0500 CDT'>May 11, 2026</span></footer>
@@ -164,10 +173,18 @@ Clicking a semester slot transforms it in-place into a dropdown (semestersTable.
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Testing Technologies
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p></p>
+    <p>What advanced testing tool or technology did you employ in your code?
+The testing suite uses two tools working together: Vitest as the test runner and React Testing Library as the component testing framework. Vitest is a modern testing framework built specifically for projects that use Vite, which means it shares the same configuration and module resolution as the rest of the project without needing a separate build pipeline for tests. React Testing Library is a library designed around the principle that tests should interact with components the same way a real user would, by looking for visible text, headings, and elements on screen rather than poking at internal state or implementation details. The two tools are installed as development dependencies in package.json and configured through vite.config.js and the setup file at src/test/setup.js.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2026-05-11 14:53:54 -0500 CDT'>May 11, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Testing Technologies" href="http://localhost:1313/my-portfolio/posts/testing-technologies/"></a>
@@ -212,8 +229,8 @@ The entire course placement layer exists solely because of the domain: academic 
     </h2>
   </header>
   <div class="entry-content">
-    <p>Instance 1 — Code review of a pull request
-Linda Jing opened Pull request to add the requirement logic to the SQL files and connect it to App.jsx. The review identified that the prerequisite logic needed adjustment to handle the case where a course appears in both a must_take block and an elective block — without duplication, the same course could satisfy two independent requirements simultaneously. The review comment resulted in the commit 2238a86 - revised pre req logic based on the code review where Linda updated the logic.
+    <p>Instance 1 — Code Review of a Pull Request
+Linda opened a pull request to add the requirement logic to the SQL files and connect it to the main application file. During the review, an issue was identified where the prerequisite logic did not account for a course appearing in both a required block and an elective block at the same time. Without handling this case, the same course could count toward two separate requirements simultaneously, which would allow a student’s plan to appear complete when it actually was not. The review comment was addressed and Linda pushed an updated commit that corrected the logic.
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>
@@ -263,11 +280,17 @@ The primary development tools were: Vite as the build tool and dev server (with 
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Process
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
     <p>What software engineering practices did your group employ to manage, distribute, and execute on their work?
-The team used GitHub flow: all work happened on feature branches, changes were submitted as pull requests, and merges required a review before being merged into main. Work was distributed by component ownership — Linda Jing was primarily responsible for SQL schema, Drilon Qerimi focused on the backend, and I was primarily responsible for the MajorRequirements component UI and the overall visual design of the app.
+The team used GitHub as the central hub for all collaboration. All development work happened on separate feature branches so that changes could be reviewed and tested before being brought into the main codebase. When a feature was ready, it was submitted as a pull request that required at least one teammate to look over before merging. This gave everyone visibility into what was changing and created a natural checkpoint to catch problems before they affected the shared codebase. Work was also distributed by area of ownership so that teammates could move quickly without constantly stepping on each other. Linda Jing was primarily responsible for the SQL schema and the data that powered the backend, Drilon Qerimi focused on the backend server and its connection to the database, and I was primarily responsible for the requirements panel component and the overall visual design of the application including the branded header, campus banner, and the collapsible tree layout.
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span></footer>

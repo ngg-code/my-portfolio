@@ -7,7 +7,8 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Prototyping | My Portfolio</title>
 <meta name="keywords" content="">
-<meta name="description" content="Prototyping - My Portfolio">
+<meta name="description" content="What design questions did you intend to answer with your prototypes?
+Our prototypes were built around two core questions. The first was whether organizing the plan as a grid of semesters would feel natural to students, or whether it would require explanation before they could use it confidently. The second was whether showing requirement completion status updating in real time as courses were added would help students plan more effectively, or whether it would pull their attention away from the task of actually building their schedule and cause them to make worse decisions.">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/my-portfolio/posts/prototyping/">
 <link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
@@ -110,11 +111,26 @@
     
     <h1 class="post-title entry-hint-parent">
       Prototyping
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h1>
     <div class="post-meta"><span title='2026-04-22 09:25:37 -0500 CDT'>April 22, 2026</span>
 
 </div>
   </header> 
+  <div class="post-content md-content"><p>What design questions did you intend to answer with your prototypes?</p>
+<p>Our prototypes were built around two core questions. The first was whether organizing the plan as a grid of semesters would feel natural to students, or whether it would require explanation before they could use it confidently. The second was whether showing requirement completion status updating in real time as courses were added would help students plan more effectively, or whether it would pull their attention away from the task of actually building their schedule and cause them to make worse decisions.</p>
+<p>How did you design your prototypes and subsequent user studies to address these questions?</p>
+<p>To test the grid layout, we built a paper prototype that arranged the eight semesters across the page in four columns, with each column representing one academic year split into its fall and spring semesters. Three students were asked to sit with the prototype and fill in a sample plan while thinking out loud, so we could hear what they were interpreting and where anything felt unclear. To test the live versus on-demand question, we built two working versions of the requirements panel. One version updated automatically every time a course was added to the plan, while the other only showed completion status when the user explicitly clicked a button to check their progress. We alternated which version each participant saw first to avoid any bias from ordering, and we watched closely for moments where their attention shifted away from the planning grid toward the requirements panel.</p>
+<p>What answers to your design questions did your efforts unveil?</p>
+<p>The semester grid turned out to be immediately understandable to all three students without any explanation needed. Each one began filling in courses right away and moved through the semesters in a natural order without hesitation. The live updating requirements panel told a different story. Two out of three students who saw it began paying close attention to the requirements checklist after adding just a few courses, and as a result started making course choices based on what would turn the most checkboxes green rather than what made sense for their sequence and workload. This led to plans that satisfied requirements on paper but had courses placed in an order that did not respect prerequisites or a sensible academic progression. The on-demand version kept students focused on building a coherent plan first and checking requirements second, which produced much better outcomes. This confirmed that the final design should use the explicit check button rather than live updates.</p>
+
+
+  </div>
 
   <footer class="post-footer">
     <ul class="post-tags">

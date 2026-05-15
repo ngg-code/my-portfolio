@@ -7,7 +7,8 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Testing Infrastructure | My Portfolio</title>
 <meta name="keywords" content="">
-<meta name="description" content="Testing Infrastructure - My Portfolio">
+<meta name="description" content="How have you automated your tests so that they both take one click to run and run automatically as part of build validation?
+The testing infrastructure is built on Vitest, which plugs directly into the existing Vite build setup through vite.config.js. A test block was added to that file specifying jsdom as the rendering environment and pointing to a setup file at src/test/setup.js that imports @testing-library/jest-dom to enable matchers like toBeInTheDocument. Two scripts were added to package.json: npm run test starts Vitest in watch mode, where it automatically re-runs all affected tests every time a file is saved, giving immediate feedback during development without any manual action. npm run coverage runs the full suite once and prints a coverage table broken down by statements, branches, functions, and lines for every file in the components folder. Because Vitest shares its configuration with Vite, there is no duplication between the build config and the test config and both tools stay in sync automatically.">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/my-portfolio/posts/testing-infrastructure/">
 <link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
@@ -110,11 +111,24 @@
     
     <h1 class="post-title entry-hint-parent">
       Testing Infrastructure
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h1>
     <div class="post-meta"><span title='2026-04-22 09:25:36 -0500 CDT'>April 22, 2026</span>
 
 </div>
   </header> 
+  <div class="post-content md-content"><p>How have you automated your tests so that they both take one click to run and run automatically as part of build validation?</p>
+<p>The testing infrastructure is built on Vitest, which plugs directly into the existing Vite build setup through vite.config.js. A test block was added to that file specifying jsdom as the rendering environment and pointing to a setup file at src/test/setup.js that imports @testing-library/jest-dom to enable matchers like toBeInTheDocument. Two scripts were added to package.json: npm run test starts Vitest in watch mode, where it automatically re-runs all affected tests every time a file is saved, giving immediate feedback during development without any manual action. npm run coverage runs the full suite once and prints a coverage table broken down by statements, branches, functions, and lines for every file in the components folder. Because Vitest shares its configuration with Vite, there is no duplication between the build config and the test config and both tools stay in sync automatically.</p>
+<p>Describe a specific occurrence in which your testing infrastructure saved you and/or your team work?</p>
+<p>The specific occurrence where this infrastructure would have prevented real lost work is the stale major data bug described in the infrastructure section. When the major switching feature was being built, the requirements panel was showing the old major&rsquo;s blocks after the dropdown changed because a variable was missing from a hook&rsquo;s dependency array. At the time this was caught through manual testing, which required repeatedly switching between majors and watching the screen carefully. If a test had existed that rendered the component with one major&rsquo;s requirements, passed in a new major&rsquo;s requirements via updated props, and then checked that the new block titles appeared and the old ones did not, that test would have failed immediately and pointed directly at the problem without any manual investigation. The watch mode in Vitest would have caught this the moment the file was saved, before the bug was ever merged into the shared codebase.</p>
+
+
+  </div>
 
   <footer class="post-footer">
     <ul class="post-tags">

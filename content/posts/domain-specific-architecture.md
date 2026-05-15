@@ -4,6 +4,7 @@ draft = false
 title = 'Domain Specific Architecture'
 +++
 src/App.jsx lines 160–308 (getPreferredSemesterIndex, getSequenceScore, canPlaceCourse)
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx
 
 What aspects of your software architecture arise because of the domain?
 

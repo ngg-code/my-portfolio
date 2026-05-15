@@ -4,9 +4,11 @@ draft = false
 title = 'Architecture'
 +++
 
-**Medium-Scale Architecture**
-
  src/App.jsx (lines 34–82), server/index.js, src/components/semestersTable.jsx, src/components/major_requirements.jsx
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/server/index.js
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/vite.config.js
+
 ```
   const [orGroupSelections, setOrGroupSelections] = useState({});
 

@@ -5,6 +5,7 @@ title = 'Testing Strategies'
 +++
 
 Sample: src/components/major_requirements.test.jsx
+https://github.com/ngg-code/4yearplanner/blob/main/src/components/major_requirements.test.jsx
 
 According to code coverage tools, what aspects of this component are covered with tests?
 

@@ -4,6 +4,8 @@ draft = true
 title = 'Testing Technologies'
 +++
 
+https://github.com/ngg-code/4yearplanner/blob/main/src/components/major_requirements.test.jsx
+
 What advanced testing tool or technology did you employ in your code?
 
 The testing suite uses two tools working together: Vitest as the test runner and React Testing Library as the component testing framework. Vitest is a modern testing framework built specifically for projects that use Vite, which means it shares the same configuration and module resolution as the rest of the project without needing a separate build pipeline for tests. React Testing Library is a library designed around the principle that tests should interact with components the same way a real user would, by looking for visible text, headings, and elements on screen rather than poking at internal state or implementation details. The two tools are installed as development dependencies in package.json and configured through vite.config.js and the setup file at src/test/setup.js.

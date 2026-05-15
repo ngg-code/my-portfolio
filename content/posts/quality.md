@@ -3,6 +3,9 @@ date = '2026-05-11T14:59:15-05:00'
 draft = true
 title = 'Quality'
 +++
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/App.jsx
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/components/major_requirements.jsx
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/server/index.js
 
 Where the codebase exemplifies engineering excellence:
 

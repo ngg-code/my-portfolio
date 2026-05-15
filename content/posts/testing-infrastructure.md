@@ -4,6 +4,10 @@ draft = true
 title = 'Testing Infrastructure'
 +++
 
+https://github.com/ngg-code/4yearplanner/blob/main/vite.config.js
+https://github.com/ngg-code/4yearplanner/blob/main/package.json
+https://github.com/ngg-code/4yearplanner/blob/main/src/test/setup.js
+
 How have you automated your tests so that they both take one click to run and run automatically as part of build validation?
 
 The testing infrastructure is built on Vitest, which plugs directly into the existing Vite build setup through vite.config.js. A test block was added to that file specifying jsdom as the rendering environment and pointing to a setup file at src/test/setup.js that imports @testing-library/jest-dom to enable matchers like toBeInTheDocument. Two scripts were added to package.json: npm run test starts Vitest in watch mode, where it automatically re-runs all affected tests every time a file is saved, giving immediate feedback during development without any manual action. npm run coverage runs the full suite once and prints a coverage table broken down by statements, branches, functions, and lines for every file in the components folder. Because Vitest shares its configuration with Vite, there is no duplication between the build config and the test config and both tools stay in sync automatically.

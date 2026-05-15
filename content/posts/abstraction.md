@@ -5,6 +5,7 @@ title = 'Abstraction'
 +++
 
 src/components/major_requirements.jsx, lines 57–123 (getBlockStatus) and lines 139–146 (block evaluation pipeline)
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/components/major_requirements.jsx
 
 ```
   function getBlockStatus(block) {

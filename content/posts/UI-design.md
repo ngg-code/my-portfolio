@@ -5,6 +5,8 @@ title = 'UI Design'
 +++
 
 src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/components/major_requirements.jsx
+https://github.com/StudiousSquirrels/4yearplanner/blob/main/src/components/semestersTable.jsx
 
 Visibility of System Status
 

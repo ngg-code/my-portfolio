@@ -4,6 +4,13 @@ draft = false
 title = 'Collaboration'
 +++
 
+PR #1: https://github.com/StudiousSquirrels/4yearplanner/pull/1
+PR #3: https://github.com/StudiousSquirrels/4yearplanner/pull/3
+PR #4: https://github.com/StudiousSquirrels/4yearplanner/pull/4
+Commit 2238a86: https://github.com/StudiousSquirrels/4yearplanner/commit/2238a86
+Commit 95b6b0c: https://github.com/StudiousSquirrels/4yearplanner/commit/95b6b0c
+Commit 3dbb7d3: https://github.com/StudiousSquirrels/4yearplanner/commit/3dbb7d3
+
 Instance 1 — Code Review of Pull Request #3
 
 Linda opened pull request #3 (feature/requirement-logic-R) to add the requirement logic to the SQL files and connect it to the main application file. During the review, an issue was identified where the prerequisite logic did not account for a course appearing in both a required block and an elective block at the same time. Without handling this case, the same course could count toward two separate requirements simultaneously, which would allow a student's plan to appear complete when it actually was not. The review comment was addressed and Linda pushed commit 2238a86 titled "revised pre req logic based on the code review" that corrected the logic.

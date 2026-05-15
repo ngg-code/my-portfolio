@@ -3,6 +3,7 @@ date = '2026-04-22T09:25:37-05:00'
 draft = false
 title = 'Self Learning'
 +++
+https://docs.google.com/document/d/1nzzsItmuu3anScEHo5nTgfloe13rnDAw117HdgLaP9Q/edit?tab=t.f7o757nux7cv
 
 Describe the technology that the tutorial addresses and how it fits into your project.
 

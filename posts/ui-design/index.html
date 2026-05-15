@@ -1,22 +1,233 @@
-<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>UI Design | My Portfolio</title><meta name=keywords content><meta name=description content="src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
-Visibility of system status :
-Status dots change from gray → green/red only after &ldquo;Check Requirements&rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: &ldquo;width 0.4s ease&rdquo;), showing that a state change just occurred.
-Direct manipulation:
-Clicking a semester slot transforms it in-place into a  dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable."><meta name=author content><link rel=canonical href=https://ngg-code.github.io/my-portfolio/posts/ui-design/><link crossorigin=anonymous href=/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css integrity="sha256-R+UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe+v3ZDTU=" rel="preload stylesheet" as=style><link rel=icon href=https://ngg-code.github.io/my-portfolio/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://ngg-code.github.io/my-portfolio/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://ngg-code.github.io/my-portfolio/favicon-32x32.png><link rel=apple-touch-icon href=https://ngg-code.github.io/my-portfolio/apple-touch-icon.png><link rel=mask-icon href=https://ngg-code.github.io/my-portfolio/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://ngg-code.github.io/my-portfolio/posts/ui-design/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://ngg-code.github.io/my-portfolio/posts/ui-design/"><meta property="og:site_name" content="My Portfolio"><meta property="og:title" content="UI Design"><meta property="og:description" content="src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
-Visibility of system status :
-Status dots change from gray → green/red only after “Check Requirements” is clicked, giving explicit feedback about what the system knows vs. what it hasn’t evaluated. The progress bar shows the correct percentage (line 191: transition: “width 0.4s ease”), showing that a state change just occurred.
-Direct manipulation:
-Clicking a semester slot transforms it in-place into a dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-05-11T14:54:22-05:00"><meta property="article:modified_time" content="2026-05-11T14:54:22-05:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="UI Design"><meta name=twitter:description content="src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
-Visibility of system status :
-Status dots change from gray → green/red only after “Check Requirements” is clicked, giving explicit feedback about what the system knows vs. what it hasn’t evaluated. The progress bar shows the correct percentage (line 191: transition: “width 0.4s ease”), showing that a state change just occurred.
-Direct manipulation:
-Clicking a semester slot transforms it in-place into a dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://ngg-code.github.io/my-portfolio/posts/"},{"@type":"ListItem","position":2,"name":"UI Design","item":"https://ngg-code.github.io/my-portfolio/posts/ui-design/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"UI Design","name":"UI Design","description":"src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)\nVisibility of system status :\nStatus dots change from gray → green/red only after \u0026ldquo;Check Requirements\u0026rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn\u0026rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: \u0026ldquo;width 0.4s ease\u0026rdquo;), showing that a state change just occurred.\nDirect manipulation:\nClicking a semester slot transforms it in-place into a dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.\n","keywords":[],"articleBody":"src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)\nVisibility of system status :\nStatus dots change from gray → green/red only after “Check Requirements” is clicked, giving explicit feedback about what the system knows vs. what it hasn’t evaluated. The progress bar shows the correct percentage (line 191: transition: “width 0.4s ease”), showing that a state change just occurred.\nDirect manipulation:\nClicking a semester slot transforms it in-place into a dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.\nAlternative considered and why current design prevail:\nA flat checklist (one row per requirement, all always visible) was considered, but we didn’t like it because it violates the minimalist design principle — a student with 18 requirement blocks visible simultaneously while also editing their plan loses focus on the planning task. The collapsible tree (line 270) allows completed blocks to be collapsed away, keeping attention on what’s incomplete. The tree also exposes the parent-child relationship between blocks and individual courses, which a flat list cannot represent.\n","wordCount":"189","inLanguage":"en","datePublished":"2026-05-11T14:54:22-05:00","dateModified":"2026-05-11T14:54:22-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ngg-code.github.io/my-portfolio/posts/ui-design/"},"publisher":{"@type":"Organization","name":"My Portfolio","logo":{"@type":"ImageObject","url":"https://ngg-code.github.io/my-portfolio/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://ngg-code.github.io/my-portfolio/ accesskey=h title="My Portfolio (Alt + H)">My Portfolio</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://ngg-code.github.io/my-portfolio/posts/ title=Competencies><span>Competencies</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent">UI Design</h1><div class=post-meta><span title='2026-05-11 14:54:22 -0500 -0500'>May 11, 2026</span></div></header><div class="post-content md-content"><p>src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)</p><p>Visibility of system status :</p><p>Status dots change from gray → green/red only after &ldquo;Check Requirements&rdquo; is clicked, giving explicit feedback about what the system knows vs. what it hasn&rsquo;t evaluated. The progress bar shows the correct percentage (line 191: transition: &ldquo;width 0.4s ease&rdquo;), showing that a state change just occurred.</p><p>Direct manipulation:</p><p>Clicking a semester slot transforms it in-place into a dropdown (semestersTable.jsx line 73). The slot itself is the interaction target, not a separate edit button elsewhere on the page. This follows the principle that objects should be directly manipulable.</p><p>Alternative considered and why current design prevail:</p><p>A flat checklist (one row per requirement, all always visible) was considered, but we didn&rsquo;t like it because it violates the minimalist design principle — a student with 18 requirement blocks visible simultaneously while also editing their plan loses focus on the planning task. The collapsible tree (line 270) allows completed blocks to be collapsed away, keeping attention on what&rsquo;s incomplete. The tree also exposes the parent-child relationship between blocks and individual courses, which a flat list cannot represent.</p></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://ngg-code.github.io/my-portfolio/posts/accessible-design/><span class=title>« Prev</span>
-<span>Accessible Design</span>
-</a><a class=next href=https://ngg-code.github.io/my-portfolio/posts/testing-technologies/><span class=title>Next »</span>
-<span>Testing Technologies</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://ngg-code.github.io/my-portfolio/>My Portfolio</a></span> ·
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/my-portfolio/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=my-portfolio/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>UI Design | My Portfolio</title>
+<meta name="keywords" content="">
+<meta name="description" content="src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)
+Visibility of System Status
+One of the core interaction design principles is that a system should always keep users informed about what is happening and what the system currently knows. The requirements panel was designed with this principle at its center. When a student first loads the application or is in the middle of building their plan, all the status indicators in the requirements panel appear in a neutral gray color. This is intentional. The gray state communicates clearly that the system has not yet evaluated the plan and is not making any claims about whether requirements are met or not. Only after the student explicitly clicks the Check Requirements button do the indicators change, with completed blocks turning green and incomplete ones turning red, and the progress bar animating to reflect the current completion percentage. The animated transition on the progress bar reinforces the fact that a meaningful state change just occurred and draws the eye to the updated information. This two-stage design, where the system stays neutral until explicitly asked to evaluate, prevents students from being misled by partial information while they are still in the middle of editing their plan.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/my-portfolio/posts/ui-design/">
+<link crossorigin="anonymous" href="/my-portfolio/assets/css/stylesheet.47e51c7d8489b002361bac156ce9a0a8776d08c5462c2cee95801efafdd90d35.css" integrity="sha256-R&#43;UcfYSJsAI2G6wVbOmgqHdtCMVGLCzulYAe&#43;v3ZDTU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/my-portfolio/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/my-portfolio/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/my-portfolio/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/my-portfolio/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/my-portfolio/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/my-portfolio/posts/ui-design/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/my-portfolio/" accesskey="h" title="My Portfolio (Alt + H)">My Portfolio</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/my-portfolio/posts/" title="Competencies">
+                    <span>Competencies</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      UI Design
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta"><span title='2026-05-11 14:54:22 -0500 CDT'>May 11, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>src/components/major_requirements.jsx lines 213–354 (tree view) and src/components/semestersTable.jsx lines 64–113 (inline-edit slots)</p>
+<p>Visibility of System Status</p>
+<p>One of the core interaction design principles is that a system should always keep users informed about what is happening and what the system currently knows. The requirements panel was designed with this principle at its center. When a student first loads the application or is in the middle of building their plan, all the status indicators in the requirements panel appear in a neutral gray color. This is intentional. The gray state communicates clearly that the system has not yet evaluated the plan and is not making any claims about whether requirements are met or not. Only after the student explicitly clicks the Check Requirements button do the indicators change, with completed blocks turning green and incomplete ones turning red, and the progress bar animating to reflect the current completion percentage. The animated transition on the progress bar reinforces the fact that a meaningful state change just occurred and draws the eye to the updated information. This two-stage design, where the system stays neutral until explicitly asked to evaluate, prevents students from being misled by partial information while they are still in the middle of editing their plan.</p>
+<p>Direct Manipulation</p>
+<p>Another core principle of interaction design is that users should be able to interact with objects directly rather than having to operate on them through separate controls elsewhere on the page. The semester grid was built with this in mind. Each course slot in the grid looks like a simple tile that the student can click on, and the moment they do, that tile transforms directly into a dropdown menu in place. There is no separate edit button, no modal window that opens, and no form that appears somewhere else on the screen. The slot itself becomes the input. This makes the interaction feel immediate and connected to the object being changed, which is exactly what direct manipulation is meant to achieve. Once a course is selected, the dropdown closes and the slot returns to its resting state showing the chosen course, completing the interaction cleanly.</p>
+<p>Alternative Design Considered and Why the Current Design Prevailed</p>
+<p>Early in the design process, a flat checklist was considered as the format for the requirements panel. In this version every requirement block would always be visible as a simple row with a checkbox, giving students a complete overview of all their requirements at once. While this has the advantage of showing everything in one place, it creates a significant problem in practice. A student working through a Computer Science or Anthropology major can have upward of eighteen separate requirement blocks. Displaying all of them simultaneously while the student is also trying to think about course sequencing in the semester grid creates an overwhelming amount of information on screen at the same time. Research in interaction design consistently shows that presenting too many elements at once increases cognitive load and reduces the quality of the decisions users make. The collapsible tree structure addresses this directly by allowing students to collapse blocks they have already completed, keeping the visible portion of the panel focused on what still needs attention. The tree format also captures something a flat checklist fundamentally cannot represent, which is the relationship between a requirement block and the individual courses that can satisfy it. In the tree view a student can expand any block to see exactly which courses count toward it and which ones they have already planned, giving them the context they need to make informed decisions without having to cross-reference the catalog separately.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/my-portfolio/posts/accessible-design/">
+    <span class="title">« Prev</span>
+    <span>Accessible Design</span>
+  </a>
+  <a class="next" href="http://localhost:1313/my-portfolio/posts/testing-technologies/">
+    <span class="title">Next »</span>
+    <span>Testing Technologies</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/my-portfolio/">My Portfolio</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
